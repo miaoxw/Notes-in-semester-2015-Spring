@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>04 Application Fundamentals</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>04 Application Fundamentals</h1>
+<h2>一、Android架构</h2>
+<ul>
+<li>蓝色——Java程序</li>
+<li>绿色——C/C++库</li>
+<li>黄色——虚拟机</li>
+<li>红色——内核</li>
+</ul>
+<h3>1.Linux内核</h3>
+<ul>
+<li>虽然建立在Linux上，但Android本身不是Linux</li>
+<li>没有原生的界面系统</li>
+<li>没有glibc的支持</li>
+<li>提供操作系统的必要、基本服务<br />
+进程、内存、电源管理、网络、驱动模型、安全……</li>
+</ul>
+<h4>使用Linux内核的原因</h4>
+<ul>
+<li>Linux本身已被证明适用于各种平台和应用</li>
+<li>Linux可提供硬件抽象层，使上层屏蔽硬件改变后的细节</li>
+<li>大多数设备都容易找到Linux驱动，不用重复编写</li>
+<li>一整套成熟的开发步骤可以复用</li>
+</ul>
+<h4>Android的特殊设备</h4>
+<ul>
+<li>Ashmem<br />
+共享内存的分配</li>
+<li>Binder<br />
+本身是RPC的机制<br />
+主设备号为10</li>
+<li>Framebuffer</li>
+<li>PM Solution<br />
+电源管理对手机非常重要<br />
+通过电源管理策略，以及<strong>wake lock</strong>机制</li>
+</ul>
+<h3>2.硬件抽象层</h3>
+<ul>
+<li>用户层的C/C++库</li>
+<li>定义整个Android的接口</li>
+<li>通过抽象，将软硬件接口分离</li>
+<li>由于Linux内核遵循GPL协议，完全公开的代码可能产生一些代价<br />
+对厂商提供一定的保护</li>
+</ul>
+<h3>3.原生C库</h3>
+<h4>Bionic libc</h4>
+<ul>
+<li>为嵌入式设备做了定制</li>
+<li>使用BSD协议</li>
+<li>代码体积更小，做了些优化</li>
+</ul>
+<h4>功能库</h4>
+<h5>Webkit</h5>
+<ul>
+<li>浏览器的核心</li>
+<li>开源，且质量尚可</li>
+</ul>
+<h5>Media Framework</h5>
+<h5>SQLite</h5>
+<h5>Surface Flinger</h5>
+<ul>
+<li>将各应用的层进行合并</li>
+<li>各个surface可2D可3D</li>
+</ul>
+<h2>二、应用</h2>
+<h3>1.编译与解释</h3>
+<h3>2.广义解析器</h3>
+<ul>
+<li>词法分析</li>
+<li>生成基于栈的字节码<br />
+JVM使用，操作与硬件无关，完全是逻辑层面的东西</li>
+</ul>
+<h3>3.dex的生成</h3>
+<ul>
+<li>Android使用DVM</li>
+<li>JDK编译出.class文件</li>
+<li>Android提供的DX工具转换为.dex文件</li>
+</ul>
+<h4>Dalvik字节码</h4>
+<ul>
+<li>基于寄存器的架构</li>
+<li>编译的指令数目减少，执行效率要高一些</li>
+</ul>
+<h3>4.Android的进程描述</h3>
+<ul>
+<li>每个应用认为是一个不同的用户</li>
+<li>每个应用运行在单独的虚拟机上</li>
+<li>系统不再需要此进程或内存不够时，将此进程杀死</li>
+</ul>
+<h4>Zygote</h4>
+<ul>
+<li>
+由系统启动时的init进程产生
+<ul>
+<li>完成DVM初始化</li>
+<li>完成库的加载</li>
+<li>预置类库的加载和初始化操作</li>
+</ul>
+</li>
+<li>运行新Android应用时，通过<code>fork</code>来共享内存</li>
+<li>负责后续框架层的其它进程的创建和启动工作</li>
+<li>Zygote首先创建SystemServer进程<br />
+负责启动系统关键服务，各种*ManagerService</li>
+<li>需要启动Android应用时，ActivityManagerService通过socket通信通知Zygote<code>fork</code>出新的进程</li>
+</ul>
+<h4>最小权限原则</h4>
+<ul>
+<li>Android系统默认使用</li>
+<li>默认情况下什么权限都没有</li>
+<li>需要权限，需要向系统申请</li>
+</ul>
+<h3>5.应用组件</h3>
+<h4>Activity</h4>
+<ul>
+<li>UI组件</li>
+<li>通常对应一屏的UI<br />
+从而可以方便地管理应用</li>
+</ul>
+<h4>Service</h4>
+<p>不需要界面运行的任务</p>
+<ul>
+<li>做一些耗时的运算或操作<br />
+避免在主线程上进行耗时的操作导致UI无法响应</li>
+<li>其它组件可以使其开始运行或与其绑定</li>
+</ul>
+<h4>Broadcast Receiver</h4>
+<p>负责响应通知和状态的改变</p>
+<ul>
+<li>处理系统的广播</li>
+</ul>
+<h4>Content Provider</h4>
+<p>用于应用（进程间）的数据共享</p>
+<h4>Activating Methods</h4>
+<ul>
+<li>startActivity()/startActivityForResult()<br />
+需要返回结果时使用后者，此时附带一个Intent</li>
+<li>startService()/bindService()</li>
+<li>sendCroadcast()/sendOrderedCroadcast()/sendStickyBroadcast()</li>
+<li>query()</li>
+</ul>
+<h4>manifest</h4>
+<ul>
+<li>包含对应用的所有配置</li>
+<li>所有组件都要在manifest中声明<br />
+<code>&lt;activyty&gt;</code>/<code>&lt;service&gt;</code>/<code>&lt;receiver&gt;</code>/<code>&lt;provider&gt;</code></li>
+<li>Intent Filter<br />
+帮助系统定位需要的活动</li>
+</ul>
+<h4>Activity与Task</h4>
+<ul>
+<li>为所有activity设定了栈结构进行存储</li>
+<li>不同的task使用不同的栈存储</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>03 移动互联网软件工程</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>移动互联网软件工程</h1>
+<h2>一、引子</h2>
+<h3>1.商学院研究生会一个月不用手机行动</h3>
+<h3>2.雷军VS董明珠的10亿对赌</h3>
+<blockquote>
+<p><em>只要站在风口，猪也能飞上天。</em>——雷军</p>
+</blockquote>
+<p>移动互联网行业与传统制造型行业的碰撞</p>
+<ul>
+<li>小米的年增长率：135%<br />
+格力的年增长率：16.63%</li>
+<li>
+格力手机
+<ul>
+<li>与智能家居的结合<br />
+智能环保家居系统的入口点</li>
+<li>信号：<strong>传统行业要继续存活必须与互联网产业集合</strong></li>
+</ul>
+</li>
+</ul>
+<h2>二、移动互联网趋势</h2>
+<h3>1.闭环</h3>
+<h4>用户消费闭环</h4>
+<h5>消费行为闭环</h5>
+<p>认知——兴趣——搜索——决策——购买——分享</p>
+<ul>
+<li>
+支付<br />
+2014年，移动端在线支付完成并普级，支付的闭环在去年年底完成<br />
+两大打车顺利对掐的原因之一就是移动支付条件已经具备
+<ul>
+<li>支付宝</li>
+<li>微信</li>
+<li>网银</li>
+<li>短信</li>
+</ul>
+</li>
+<li>
+O2O<br />
+线上——线下<strong>——线上</strong>
+<ul>
+<li>用户<br />
+线上买券、线下消费、线上点评<br />
+返回到线上的过程才能促成O2O的良性循环</li>
+<li>团购网<br />
+线上推广、卖券、收入分成、数据分析</li>
+<li>卖家<br />
+用户消费、收券、收入分成、改进服务</li>
+</ul>
+</li>
+</ul>
+<h4>商业模式闭环——移动广告</h4>
+<p>广告产业一旦成熟，此商业模式将带活很多企业，因广告而获取利润<br />
+<em>即使企业本身并没有特定的盈利模式</em></p>
+<h3>2.规模</h3>
+<h4>用户规模</h4>
+<ul>
+<li>2014年，移动智能终端活跃设备总数达到10.6亿</li>
+<li>智能机大盘增速放缓</li>
+<li>移动网民规模</li>
+<li>用户开始向移动端迁徙</li>
+</ul>
+<h4>应用规模</h4>
+<ul>
+<li>应用使用时长增加</li>
+<li>应用覆盖率显示BAT应用占主流，腾讯系应用的布局更广</li>
+</ul>
+<h3>3.领域</h3>
+<ul>
+<li>移动广告<br />
+专门的banner</li>
+<li>移动电商<br />
+“闪购”大大缩短了决策时间</li>
+<li>移动金融<br />
+拥有渠道和数据</li>
+<li>移动视频<br />
+视频本身的盈利模式并不那么出色</li>
+<li>移动游戏</li>
+<li>移动新闻</li>
+<li>移动旅游</li>
+<li>移动健康管理</li>
+<li>移动教育</li>
+<li>移动医疗<br />
+预约挂号、药品</li>
+</ul>
+<p>制作的app需要适应广大群众的需要，以便正确盈利</p>
+<h2>三、生态系统</h2>
+<h3>1.操作系统之争</h3>
+<ul>
+<li>目前主要是iOS与Android的竞争</li>
+<li>采取的产品线策略不同</li>
+<li>重点并不是技术优劣，而是生态系统</li>
+</ul>
+<h3>2.iOS生态系统</h3>
+<p>与各个方面都能产生关系</p>
+<ul>
+<li>广告主</li>
+<li>广告商</li>
+<li>软件开发商</li>
+<li>运营商</li>
+<li>消费者</li>
+<li>设备生产商</li>
+</ul>
+<h4>iOS的优势</h4>
+<ul>
+<li>软件硬件同时生产控制</li>
+<li>控制性能</li>
+</ul>
+<h3>3.Android生态系统</h3>
+<ul>
+<li>也与iOS一样构建了相同的生态系统</li>
+<li>把饼画大，让更多人赚到钱</li>
+</ul>
+<h3>4.程序员对生态系统的意义</h3>
+<ul>
+<li>决定应用数量</li>
+<li>Android的成功与程序员密不可分<br />
+Java与Web</li>
+</ul>
+<h4>程序员的关注点</h4>
+<h5>操作系统</h5>
+<h4>手机操作系统</h4>
+<ul>
+<li>iOS</li>
+<li>Android</li>
+<li>Windows Phone</li>
+<li>Tizen（呵呵）</li>
+<li>……</li>
+</ul>
+<h5>应用商店</h5>
+<ul>
+<li>App Store</li>
+<li>Google Play、百度旗下、360、腾讯</li>
+<li>WP Store</li>
+</ul>
+<p>应用商店的运作需要大量的资本</p>
+<h5>收益分成</h5>
+<ul>
+<li>广告</li>
+<li>应用内支付</li>
+</ul>
+<h5>开发语言</h5>
+<ul>
+<li>OC、Swift</li>
+<li>Java</li>
+<li>C#</li>
+<li>C++</li>
+</ul>
+<h5>开发工</h5>
+<p>具</p>
+<h5>开发支持</h5>
+<ul>
+<li>iPhone devsdk</li>
+<li>cocoa China</li>
+<li>xda-developers</li>
+<li>MSDN</li>
+<li>stackoverflow</li>
+</ul>
+<p><em>抄袭是移动互联网中需求获取的重要方法</em></p>
+<h2>四、移动互联网对软件工程的影响</h2>
+<h3>1.软件工程的定义</h3>
+<p>略</p>
+<ul>
+<li>软件工程就是软件过程？</li>
+<li>“虚”？</li>
+</ul>
+<h3>2.软件工程的最佳实践</h3>
+<h4>持续集成</h4>
+<h5>过程</h5>
+<ul>
+<li>各个阶段</li>
+<li>什么时候开始，什么时候结束</li>
+</ul>
+<h5>技术</h5>
+<ul>
+<li>如何写集成测试用例</li>
+<li>如何写driver，如何写stub</li>
+</ul>
+<h5>工具</h5>
+<ul>
+<li>jenkins</li>
+<li>Maven</li>
+<li>SVN</li>
+</ul>
+<p>过程、技术、工具的融会贯通</p>
+<h3>3.移动互联网的特点</h3>
+<h4>不确定性</h4>
+<ul>
+<li>用户人数多</li>
+<li>地理分布广</li>
+<li>需求不明确</li>
+</ul>
+<h4>要求高</h4>
+<ul>
+<li>不能闪退<br />
+安装与卸载成本极低，因此一旦崩溃就有巨大后果</li>
+<li>安全</li>
+<li>易用</li>
+</ul>
+<h4>环境复杂</h4>
+<ul>
+<li>多机种<br />
+1.5W Android设备</li>
+<li>分辨率</li>
+<li>网络环境</li>
+</ul>
+<h3>4.移动互联网对软件工程产生的影响</h3>
+<h4>过程</h4>
+<ul>
+<li>快速迭代</li>
+<li>原型方法</li>
+</ul>
+<h4>技术</h4>
+<ul>
+<li>
+需求获取
+<ul>
+<li>快速上线</li>
+<li>在线数据分析</li>
+</ul>
+</li>
+<li>
+人机交互
+<ul>
+<li>导航</li>
+<li>反馈</li>
+</ul>
+</li>
+<li>
+架构设计
+<ul>
+<li>Native、HTML5、Hybrid</li>
+<li>跨平台设计</li>
+</ul>
+</li>
+<li>
+测试
+<ul>
+<li>自动化测试</li>
+<li>众测</li>
+</ul>
+</li>
+<li>
+产品
+<ul>
+<li>与硬件设计、外观设计一体考量</li>
+</ul>
+</li>
+</ul>
+<h3>5.*QCon 2015</h3>
+<ul>
+<li>云平台</li>
+<li>大数据</li>
+<li>移动开发<br />
+移动应用的平台化</li>
+<li>编程语言和平台<br />
+在线开发</li>
+<li>全栈开发</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

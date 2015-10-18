@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>交互需求定义</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>交互需求定义</h1>
+<h2>一、需求</h2>
+<h3>1.需求是什么</h3>
+<ul>
+<li>关于目标产品的陈述，制定了产品应做什么，或是应如何工作</li>
+<li>具体、明确、无歧义</li>
+</ul>
+<h3>2.产品特性导致需求差异</h3>
+<ul>
+<li>功能不同</li>
+<li>物理条件不同</li>
+<li>使用环境不同</li>
+</ul>
+<h3>3.用户特性影响产品需求</h3>
+<ul>
+<li>心理学原理部分<br />
+假设每个人都有相似的能力和局限性<br />
+这是合理的，心理学远离可以适用于大多数人</li>
+<li>交互产品设计人员应该意识到个性的差异<br />
+用户并不是完全相同的，在设计中应当注意到这一点</li>
+</ul>
+<h4>体验水平差异</h4>
+<ul>
+<li>新手<br />
+让新手快速和无痛苦地成为中间用户</li>
+<li>中间用户<br />
+使他们感到愉快，因为他们的技能将稳定地处于中间层</li>
+<li>专家<br />
+避免为想成为专家的用户设置障碍</li>
+</ul>
+<h5>新手用户</h5>
+<ul>
+<li>敏感，很容易在开始有挫折感</li>
+<li>设计时不能将新手状态视为目标</li>
+<li>学习过程要快速且富有针对性<br />
+因此不能使用传统的帮助文档</li>
+<li>提供的帮助不能被固定在界面上<br />
+最好提供具有想到功能的对话框</li>
+<li>提供的菜单项应当具有解释性</li>
+</ul>
+<h5>专家用户</h5>
+<ul>
+<li>对缺少经验的用户影响力强大<br />
+新手用户对专家言听计从</li>
+<li>欣赏更新且更强大的功能</li>
+<li>不会收到复杂性的干扰</li>
+<li>需要为专家用户提供一些复杂的功能</li>
+<li>要提供特殊功能的快速访问</li>
+</ul>
+<h5>中间用户</h5>
+<ul>
+<li>需要一些工具完成相关任务</li>
+<li>中间用户的设计是最容易被忽视的</li>
+<li>为中间用户经常使用的工具集提供快速访问的方法</li>
+<li><strong>工具提示</strong>是适合中间用户最好的习惯用法</li>
+<li>在线帮助</li>
+</ul>
+<h4>年龄差异</h4>
+<h5>老年人</h5>
+<ul>
+<li>65岁以上的老年人多数有某种残疾<br />
+眼、耳</li>
+<li>技术要提供对残缺部位的支持</li>
+<li>设计必须清楚、简单并且容许出错</li>
+<li>利用冗余来支持信息访问</li>
+</ul>
+<h5>儿童</h5>
+<ul>
+<li>设计儿童的交互系统时需要让他们参加</li>
+<li>允许多种输入模式的界面对儿童更适用</li>
+<li>多媒体的信息冗余显示可增强他们的体验</li>
+</ul>
+<h4>文化差异</h4>
+<ul>
+<li>不同的符号有不同的含义</li>
+<li>姿势的理解存在差别</li>
+<li>颜色的使用</li>
+</ul>
+<h4>健康差异</h4>
+<ul>
+<li>每个国家至少有10%的人口有残疾</li>
+<li>视觉损伤</li>
+<li>听觉损伤</li>
+<li>身体损伤</li>
+<li>语音损伤</li>
+<li>诵读困难</li>
+</ul>
+<h2>二、用户建模</h2>
+<h3>1.人物角色</h3>
+<ul>
+<li>不是真实的人</li>
+<li>基于观察到的真是人的行为和动机，并且在整个设计过程中代表真实的人</li>
+<li>在人口统计学调查收集到的是个实际用户行为数据基础上形成的综合原型</li>
+<li>概念简单，但使用相当复杂</li>
+</ul>
+<h4>人物角色的作用</h4>
+<p>解决产品开发过程中出现的三个问题</p>
+<ul>
+<li>弹性用户</li>
+<li>自参考设计</li>
+<li>边缘情况设计</li>
+</ul>
+<h4>人物角色的构造</h4>
+<ul>
+<li>与某个系统有关的用户假定的一组公共需要、兴趣、期望、行为模式和责任</li>
+<li>这些属性可能是若干用户共有</li>
+<li>同一个用户也可以扮演系统的任意的不同角色</li>
+</ul>
+<h5>基于以下问题</h5>
+<ul>
+<li>谁将使用系统</li>
+<li>这些用户属于哪些类型的人群？</li>
+<li>什么因素决定他们将怎样使用系统？</li>
+<li>他们与软件的关系有什么特征？</li>
+<li>他们通常需要软件提供什么支持？</li>
+<li>他们对软件会有怎样的行为？他们对软件的行为有什么期望？</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>要注意与软件用户界面设计有关的角色特征</li>
+<li>留心焦点角色</li>
+<li>关注使角色之间彼此相区别的特征</li>
+</ul>
+<h3>2.建模过程</h3>
+<ul>
+<li>拼凑</li>
+<li>组织</li>
+<li>细节</li>
+<li>求精</li>
+</ul>
+<p>以上过程循环反复</p>
+<h2>三、需求获取——场景</h2>
+<ul>
+<li>场景是表示任务和工作结构的<strong>“非正式的叙述性描述”</strong></li>
+<li>讲故事是人们解释自己做什么或者希望执行某个人物的最自然方式</li>
+</ul>
+<h3>1.人物角色+场景剧本-&gt;需求</h3>
+<ul>
+<li>创建问题和前景综述</li>
+<li>头脑风暴</li>
+<li>确定人物角色的期望</li>
+<li>构建情境场景剧本</li>
+<li>确立需求</li>
+</ul>
+<p>以上过程迭代，直到需求变得稳定</p>
+<h4>创建问题的前景综述</h4>
+<ul>
+<li>设计问题综述应该简明地反映需要改变的情况，来服务人物角色和提供产品给人物角色的商业组织</li>
+<li>前景综述高层次的设计师图和需求是问题综述的倒置</li>
+</ul>
+<h4>头脑风暴</h4>
+<ul>
+<li>“说反话”</li>
+<li>尽可能去除成见，允许设计师以开放和灵活的方式想象来构建场景剧本，使用他们的思维从场景剧本中得到需求</li>
+<li>将头脑置于解决问题模式中</li>
+<li>不受约束，不加以评判</li>
+</ul>
+<h4>确定人物角色的期望</h4>
+<ul>
+<li>社会背景</li>
+<li>使用产品的目标</li>
+<li>主体提到了什么</li>
+<li>使用了哪些动词和名词</li>
+<li>没有提及对象中的哪些中间步骤、任务或对象</li>
+</ul>
+<h4>构造情境场景剧本</h4>
+<ul>
+<li>关注人物角色的活动和心理模型与动机</li>
+<li>专注于高层次的用户角度描述的行动<br />
+广而浅</li>
+</ul>
+<h4>确定需求</h4>
+<ul>
+<li>在情境场景剧本中直接提取需求</li>
+</ul>
+<p>或者用以下三种分类分别获取</p>
+<ul>
+<li>数据需求</li>
+<li>功能需求</li>
+<li>其它需求</li>
+</ul>
+<h2>四、任务分析</h2>
+<h3>1.层次化任务分析（HTA）</h3>
+<h3>2.方框—线条图示</h3>
+<ul>
+<li>方框描述任务，线条表示执行次序</li>
+<li>树的结构</li>
+<li>任务若不能再被分解，下方标注一条横线</li>
+</ul>
+<h3>3.用途</h3>
+<ul>
+<li>手册和教学</li>
+<li>需求获取和系统设计</li>
+<li>详细的接口设计<br />
+用于菜单的设计</li>
+</ul>
+<h2>五、原型</h2>
+<h3>1.原型的分类</h3>
+<h4>低保真原型</h4>
+<ul>
+<li>与最终产品不太相似的原型</li>
+<li>使用与最终产品不同的材料</li>
+<li>简单，便宜，易于制作和修改</li>
+</ul>
+<h4>高保真原型</h4>
+<ul>
+<li>与最终产品更为接近</li>
+</ul>
+<p>实际工作中更多地使用低保真原型</p>
+<h3>2.原型体现交互逻辑</h3>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

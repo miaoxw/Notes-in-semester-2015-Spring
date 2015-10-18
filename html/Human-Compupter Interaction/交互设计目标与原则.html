@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>交互设计目标与原则</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>交互设计目标与原则</h1>
+<h2>一、背景概述</h2>
+<h3>软件</h3>
+<h3>3.可用性目标</h3>
+<p>不仅涉及人与之正在发生交互作用的系统，还包括系统对使用它的人所产生的作用</p>
+<h4>易学性</h4>
+<ul>
+<li>使用系统的难易，即系统应当容易学习，从而用户可以在较短时间内应用系统来完成某些任务</li>
+<li>对应系统学习曲线的开头部分<br />
+“10分钟法则”<br />
+<em>不同产品的定位不同，对易学性的要求可能并不相同</em></li>
+</ul>
+<h4>高效率</h4>
+<p>人不会无故地与一个计算系统打交道，总是存在目的，使用系统进行处理事务至少不能比不使用快</p>
+<ul>
+<li>当用户学会使用产品之后，用户应该具有更高的生产力水平</li>
+</ul>
+<h4>主观满意度</h4>
+<ul>
+<li>用户对系统的主观喜爱程度</li>
+<li>某些情况下，系统的娱乐价值比完成任务的速度更为重要</li>
+</ul>
+<h5>观念的转变</h5>
+<ul>
+<li>传统软件质量观<br />
+侧重内部效率和可靠性</li>
+<li>人机交互软件质量观<br />
+转向用户视角</li>
+</ul>
+<h4>少出错</h4>
+<ul>
+<li>人是会犯错误的，有些无关紧要，有些错误会造成灾难性后果</li>
+<li>要保证导致灾难性后果错误的发生频率降到最低，错误发生后迅速恢复到正常状态</li>
+</ul>
+<h4>易记性</h4>
+<ul>
+<li>用户在学会使用软件后应当容易记忆</li>
+<li>学会某个系统后，应能够迅速回想起它的使用方法</li>
+</ul>
+<h5>易记性的影响因素</h5>
+<ul>
+<li>位置</li>
+<li>分组</li>
+<li>惯例</li>
+<li>冗余</li>
+</ul>
+<h3>4.用户体验目标</h3>
+<h4>用户体验的含义</h4>
+<ul>
+<li>用户在系统交互时的感觉<br />
+面向儿童和年轻人的网站，就应该给人带来不同的感觉</li>
+<li>较可用性目标主观</li>
+<li>可用性可能对用户体验带来阻碍</li>
+</ul>
+<h2>二、简易可用性工程</h2>
+<p>完整的可用性工程非常复杂，对企业而言很有效，但碍于成本，无法应用</p>
+<h3>1.特点</h3>
+<ul>
+<li>以提高产品的可用性为目标的先进的产品开发方法论</li>
+<li>借鉴了许多不同领域的方法和技术</li>
+<li>强调以人为中心来进行交互式产品的设计研发</li>
+</ul>
+<h3>2.历史</h3>
+<ul>
+<li>上世纪80年代获得工业应用</li>
+<li>90年代得到迅速普及</li>
+</ul>
+<h3>3.实例</h3>
+<ul>
+<li>IBM</li>
+<li>MS</li>
+</ul>
+<h3>4.可用性度量</h3>
+<h4>常用方法</h4>
+<ul>
+<li>选择一些代表目标用户群体的测试用户</li>
+<li>让这些用户执行一组预定的任务</li>
+<li>比较任务的执行情况</li>
+<li>
+针对多维属性
+<ul>
+<li>取每个可用性属性的平均值</li>
+<li>查看整体分布情况</li>
+</ul>
+</li>
+</ul>
+<h4>主观满意度度量举例</h4>
+<ul>
+<li>在1-5分的情况下平均值至少为4<br />
+研究表明5分制的打分中值应当在3.6以上</li>
+<li>或至少50%的用户给系统打5分</li>
+<li>或打1分的用户不超过5%</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>人机交互的历史</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h2>一、HCI是门交叉学科</h2>
+<p>孤立地从一个学科出发不可能设计出有效的交互式系统</p>
+<h3>1.Scott Kim</h3>
+<p>学科就像文化</p>
+<ul>
+<li>必须尊重对方的语言、习俗和价值观</li>
+<li>任何能够促进交流的方法都将使设计过程以及最终的产品获益</li>
+</ul>
+<h4>Alan Dix的建议</h4>
+<p>要特别关注作为核心学科的计算机科学、心理学和认知科学在交互式系统设计方面的应用</p>
+<h2>二、人机交互的历史</h2>
+<p>几乎每一次计算机的进步都可以认为是交互的进步</p>
+<ul>
+<li>新的界面变革包含了上一代界面<br />
+作为一种特例</li>
+<li>旧的交互方式仍有其存在的必要性<br />
+以前的用户并没有消失</li>
+<li>学习目的<br />
+利用原有技术实现新的交互手段</li>
+</ul>
+<h3>1.重要的学术事件</h3>
+<ul>
+<li>1945年，Vannevar Bush<br />
+<strong>As we may think</strong>（诚如所思）<br />
+应借助设备或技术帮助科学家检索、记录、分析及传输各种信息<br />
+虚构的Memex工作站</li>
+<li>1959年，HCI领域的第一篇论文<br />
+从减轻操作疲劳的角度讨论计算机控制台设计</li>
+<li>
+1960年
+<ul>
+<li>JCR Licklider<br />
+<strong>Human-Computer Symbiosis</strong>（人机共生）</li>
+<li>HCI的启蒙观点</li>
+</ul>
+</li>
+<li>1969年<br />
+第一次人机系统国际大会召开，第一份专业杂志创刊</li>
+<li>1970年，拉夫堡大学的HUSAT研究中心和施乐的Palo Alto研究中心成立（PRAC）</li>
+<li>80年代<br />
+出版学术专著<br />
+Interface-&gt;Interaction</li>
+<li>90年代<br />
+智能化交互、多通道交互、虚拟现实、脑机交互……</li>
+</ul>
+<h3>2.主要发展阶段</h3>
+<h4>批处理</h4>
+<ul>
+<li>每次只能由一个用户对计算机进行操作</li>
+<li>编写程序以01串表示的机器语言</li>
+</ul>
+<h4>联机终端时代</h4>
+<ul>
+<li>一维界面</li>
+<li>回车后不能再对命令内容进行修改</li>
+</ul>
+<h4>带指针设备的GUI</h4>
+<ul>
+<li>WIMP界面<br />
+Window-Icon-Menu-Pointing device<br />
+用户可在窗口内选取任意交互位置，且不同窗口之间能够叠加<br />
+二维半界面</li>
+<li>GUI的主要特征<br />
+直接操纵</li>
+</ul>
+<h5>GUI优于字符界面？</h5>
+<p>不同的交互方式本身在可用性方面没有根本不同，更重要的是认真对待界面设计的态度</p>
+<h3>3.著名的人物与事件</h3>
+<h4>Vannevar Bush</h4>
+<p><em>也被认为是情报学的始祖</em></p>
+<ul>
+<li>As we may think</li>
+<li>超文本之父<br />
+预计了PC和Web的出现</li>
+<li>制造了世界上首台模拟电子计算机</li>
+<li>Memex</li>
+<li>被尊为信息时代的教父</li>
+</ul>
+<h4>Ivan Sutherland</h4>
+<ul>
+<li>SketchPad，1963<br />
+第一个交互式绘图系统<br />
+许多思想至今沿用<br />
+使用光笔画图<br />
+计算机图形学之父</li>
+<li>第一个虚拟头盔<br />
+实现了三维立体显示<br />
+虚拟现实之父</li>
+<li>获得1988年图灵奖</li>
+</ul>
+<h4>Douglas Engelbart</h4>
+<ul>
+<li>1964年发明鼠标<br />
+被IEEE列为计算机诞生50年来最重大的事件之一</li>
+<li>Augmenting the Human Intellect</li>
+<li>超文本技术的研究</li>
+<li>第一个标准化的编辑器NLS（oNLine System）<br />
+<em>The mother of all demos</em></li>
+<li>获得1997年图灵奖</li>
+</ul>
+<h4>Alan C. Kay</h4>
+<ul>
+<li>
+1977年服务于Xerox PARC
+<ul>
+<li>提出为服务于个人的直接操作界面Dynabook</li>
+<li>现代笔记本电脑的原型</li>
+</ul>
+</li>
+<li>发明Smalltalk</li>
+</ul>
+<h4>Mark Weiser</h4>
+<p><strong>普适计算</strong>是21世纪的计算模式</p>
+<ul>
+<li>于1988年在PARC的计算机科学实验室首次提出这个概念</li>
+<li>它把计算机潜入到各种类型的设备中，建立一个将计算和通信融入人类生活空间的交互环境，从而极大地提高个人的工作以及与他人合作的效率</li>
+</ul>
+<h4>Xerox Alto</h4>
+<ul>
+<li>Star的前身，发布于1973年</li>
+<li>首台真正意义上的个人计算机，有键盘和显示器、图形界面技术、以太网技术</li>
+<li>第一个所见即所得的文字处理软件Bravo</li>
+</ul>
+<h4>Xerix Star</h4>
+<ul>
+<li>为商务人员设计的商用图形界面PC<br />
+具有了桌面电脑的主要特征</li>
+<li>第一个基于</li>
+</ul>
+<h4>IBM PC</h4>
+<h4>Apple Lisa</h4>
+<ul>
+<li>定位文档处理工作站</li>
+<li>概念很成功，但商业失败</li>
+</ul>
+<h4>Apple Macintosh</h4>
+<p>获得商业上的广泛成功</p>
+<ul>
+<li>价格低</li>
+<li>界面友好</li>
+<li>支持第三方应用</li>
+<li>高质量的图像和激光打印</li>
+</ul>
+<h4>Microsoft Windows</h4>
+<p>原定于83年发布的Windows于1987年8月11日发布</p>
+<h4>Interactive and command line</h4>
+<p>VisiCalc</p>
+<h3>4.未来的人机交互</h3>
+<h4>GUI正遭受越来越多的批评</h4>
+<ul>
+<li>一只耳朵，一只手指，一只眼睛</li>
+<li>计算机像书本一样方便地使用和携带</li>
+</ul>
+<h4>多媒体界面</h4>
+<ul>
+<li>引入动画、音视频等动态媒体</li>
+<li>2.5D-&gt;3D-&gt;更高</li>
+</ul>
+<h4>多通道交互技术</h4>
+<p>具有并行性，可同时接收来自多个通道的信息</p>
+<h4>虚拟现实</h4>
+<p>VR与AR（增强现实）</p>
+<h4>语音交互</h4>
+<h4>脑机交互</h4>
+<p>下一代界面的主要风格将是没有命令的用户界面</p>
+<ul>
+<li>由更多的媒体类型来构成更高的信息维度</li>
+<li>交互也将高度</li>
+</ul>
+<h2>三、人机交互与软件工程</h2>
+<ul>
+<li>软件工程师与人机交互设计人员关注的重点有很大不同<br />
+以功能为中心/以用户为中心</li>
+<li>交互设计的评估方式也与一般软件工程方法存在不同</li>
+<li>两者经常分开讨论</li>
+</ul>
+<h3>1.HCI对SE的促进作用</h3>
+<h4>传统SE方法在实现交互式系统方面的缺陷</h4>
+<ul>
+<li>没有提出明确的对用户界面及可用性需求进行描述的方法</li>
+<li>不能在系统开发中对用户界面进行系统测试</li>
+</ul>
+<h4>两者在系统工程中的关系</h4>
+<h4>两者结合的困难</h4>
+<ul>
+<li>价值观不同</li>
+<li>方法论存在差异</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

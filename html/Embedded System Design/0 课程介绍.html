@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>0 课程介绍</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>课程介绍</h1>
+<h2>一、嵌入式软件开发路线图</h2>
+<ul>
+<li>系统越来越复杂，嵌入式系统的软件开发逐渐变成了软件专家的工作</li>
+<li>对电子硬件很了解，也愿意做一些硬件米却相关的工作</li>
+</ul>
+<blockquote>
+<p>最近10~15年，伴随着嵌入式软件规模和复杂性的爆炸性增长，专门的软件开发团队进入了视野。软件团队在不断壮大，但增长不仅仅是为了完成所需的代码。嵌入式软件团队中有不同领域的专家，包括网络、UI设计、硬件设备、传统嵌入式软件设计等方面。</p>
+</blockquote>
+<p>互联与UI决定了嵌入式产品的成败，因此比重相当大</p>
+<h2>二、嵌入式软件与桌面软件的对比</h2>
+<h3>1.内存</h3>
+<p>有限，影响编程语言的选择和开发工具的使用  </p>
+<ul>
+<li>编译器优化</li>
+<li>选用C++，可能无法当时就确定对内存容量的需求<br />
+产生对设计的影响</li>
+</ul>
+<p><em>虽然差异越来越小，但仍然造成了制约</em></p>
+<h3>2.CPU处理能力</h3>
+<p>出于成本和功耗的考虑，ES不得不采用保守的设计方案，CPU往往<strong>恰好</strong>满足需求</p>
+<h3>3.操作系统</h3>
+<p>OS（Windows/*nix）、RTOS、专有OS或裸机</p>
+<h3>4.实时行为</h3>
+<ul>
+<li>不需要很快，但需要可预测——确定性</li>
+<li>实时性对OS的选择和程序设计都有影响</li>
+</ul>
+<h3>5.开发流程</h3>
+<ul>
+<li>交叉开发</li>
+<li>执行程序这一步非常复杂</li>
+</ul>
+<h3>6.执行流程</h3>
+<p>多数设备从加电开始就运行程序，直到关机</p>
+<h3>7.差异性</h3>
+<ul>
+<li>技术层面<br />
+架构、内存、外设、应用、OS</li>
+<li>商业运作层面</li>
+</ul>
+<h3>8.嵌入式软件工具和组件</h3>
+<p>需要运用工具来构建和测试软件，同时也可能引入可重用的软件组件</p>
+<h3>9.开发工具</h3>
+<ul>
+<li>交叉编译器</li>
+<li>嵌入式应用中可能直接包含小部分asm</li>
+<li>连接器要灵活地应对复杂的内存映射机制，满足精确性要求</li>
+<li>调试器要对应一系列不同运行环境的工具</li>
+<li>其它针对性的工具<br />
+分析实施性能、分析代码执行时设备功耗情况</li>
+</ul>
+<h3>10.软件组件</h3>
+<h4>库</h4>
+<ul>
+<li>应当适合嵌入式环境<br />
+可以重入，可以存储在ROM中（可固化）</li>
+<li>其它库可能并不适合嵌入式应用<br />
+尤其是C++库，如STL</li>
+</ul>
+<h4>与硬件的交互</h4>
+<ul>
+<li>设备驱动提供了这样的接口</li>
+<li>不同的网络支持<br />
+检查有效性，确保符合标准，并能和其它系统互通互联</li>
+<li>有组织的数据存储<br />
+能应对电源故障和支持多线程等</li>
+</ul>
+<h4>支持复杂的图像和用户界面</h4>
+<p>LCD的成本降低使其能够被应用到嵌入式设计中</p>
+<h3>三、参考书</h3>
+<ol>
+<li>嵌入式软件开发精解，机械工业出版社，2014</li>
+<li>嵌入式Linux基础教程（第2版），人民邮电出版社，2012</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

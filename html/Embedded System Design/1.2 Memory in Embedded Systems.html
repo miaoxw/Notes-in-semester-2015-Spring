@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>1.2 Memory in Embedded Systems</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>1.2 Memory in Embedded Systems</h1>
+<h2>一、存储器</h2>
+<ul>
+<li>无声的革命</li>
+<li>存储空间的发展</li>
+<li>寻址的发展</li>
+</ul>
+<h3>1.存储的定义</h3>
+<h4>硬件设计师</h4>
+<ul>
+<li>保存数据</li>
+<li>RAM与ROM</li>
+<li>动态/静态</li>
+</ul>
+<h4>软件工程师</h4>
+<ul>
+<li>保存代码和数据</li>
+<li>运行程序的空间</li>
+</ul>
+<h4>嵌入式系统设计师</h4>
+<ul>
+<li>RAM/ROM</li>
+</ul>
+<h4>C编译器设计师</h4>
+<ul>
+<li>数据区</li>
+<li>代码区</li>
+<li>堆栈</li>
+<li>I/O设备</li>
+<li>……</li>
+</ul>
+<h3>2.可固化代码</h3>
+<ul>
+<li>可固化性</li>
+<li>代码和数据必须分开<br />
+除非是常量数据</li>
+</ul>
+<h2>二、程序段</h2>
+<ul>
+<li>对存储器单元命名</li>
+<li>由链接器完成此工作</li>
+</ul>
+<h3>1.静态变量</h3>
+<ul>
+<li>不在栈和寄存器中</li>
+<li>可初始化，不指定时0为默认值</li>
+<li>内存中的随机值可能产生问题</li>
+</ul>
+<h4>解决的方式</h4>
+<ul>
+<li>显式地初始化</li>
+<li>保存在ROM中<br />
+将其看作一种常量</li>
+<li>保存在ROM中，但将其在启动时复制到RAM中<br />
+需要提供相应的映射机制</li>
+</ul>
+<h3>2.开发工具的分段解决方案</h3>
+<ul>
+<li>code</li>
+<li>zerovars</li>
+<li>initvars</li>
+<li>const</li>
+<li>strings</li>
+<li>literals</li>
+<li>tags</li>
+</ul>
+<h2>二、存储器体系结构</h2>
+<h3>1.类型</h3>
+<h4>平面单一</h4>
+<ul>
+<li>由C提供固有支持</li>
+<li>地址可以不连续<br />
+存在保证正确访问的机制</li>
+<li>0空间可能存在问题</li>
+</ul>
+<h4>分段</h4>
+<ul>
+<li>near and far<br />
+是否在本段中就能完成数据访问</li>
+<li>段寄存器帮助在更大空间中寻址</li>
+</ul>
+<h4>单元切换</h4>
+<ul>
+<li>以小的窗口缓冲区映射到大地址范围的不同位置</li>
+<li>支持的编译器并不多</li>
+</ul>
+<h4>多地址空间</h4>
+<ul>
+<li>将内存存储分为不同的段<br />
+彼此之间界限分明，数据不可交换</li>
+<li>高级语言需要额外的指示将它们放置在正确的位置中</li>
+</ul>
+<h4>虚拟存储</h4>
+<ul>
+<li>严格来说不是存储架构</li>
+<li>在内存和交换区间实现数据替换</li>
+<li>嵌入式系统中并不经常使用<br />
+数据延迟会导致实时性问题</li>
+</ul>
+<h3>2.Cache</h3>
+<ul>
+<li>提供更好的性能</li>
+<li>有效的利用可以用于优化</li>
+</ul>
+<h3>3.MMU</h3>
+<ul>
+<li>提供存储器保护</li>
+<li>通常由RTOS管理</li>
+</ul>
+<h4>实现方式</h4>
+<ul>
+<li>分块的内存区域</li>
+<li>进程模型的实现</li>
+</ul>
+<h2>三、软件影响硬件设计</h2>
+<h3>1.硬件的设计者</h3>
+<ul>
+<li>通常是软件和硬件两个团队分别进行软硬件设计<br />
+同时了解两方面知识的人毕竟很少</li>
+<li>不同的设计方案总会在最终产品中有体现<br />
+<strong>软件设计的介入越早越好</strong></li>
+</ul>
+<h3>2.软硬件的tradeoff</h3>
+<h4>微处理器的选择</h4>
+<ul>
+<li>影响软件效率</li>
+<li>软件工具对CPU性能的要求</li>
+</ul>
+<h4>存储的大小与搭配</h4>
+<ul>
+<li>尽可能晚地决定<br />
+通常很难在早期对内存的需求做出准确的估计</li>
+<li>使用可替换的RAM/ROM</li>
+</ul>
+<h4>外设的实现</h4>
+<ul>
+<li>
+可以以软件的方式解决硬件的问题
+<ul>
+<li>软件实现会对CPU产生一定负载<br />
+关注成本，CPU性能又有富余时可以选用</li>
+<li>硬件实现</li>
+</ul>
+</li>
+</ul>
+<h3>3.硬件调试</h3>
+<h4>在线仿真器</h4>
+<p>最为理想的工具</p>
+<ul>
+<li>类似于替换的处理器</li>
+<li>以非侵入的方式进行调试</li>
+<li>完整地控制CPU的执行序列</li>
+<li>没有被广泛使用<br />
+成本很高，主频的提高带来更多问题</li>
+</ul>
+<h4>基于监控的调试器</h4>
+<p>在RTOS的框架之下很常用</p>
+<ul>
+<li>需要通信通道</li>
+<li>需要ROM/RAM的替换</li>
+</ul>
+<h4>片上调试</h4>
+<ul>
+<li>CPU需要支持此形式</li>
+<li>需要目标机与宿主机的连接器<br />
+不仅是物理上的，还有逻辑上的协议</li>
+</ul>
+<h3>4.自检的支持</h3>
+<h4>I/O的电路</h4>
+<p>回环的功能</p>
+<h4>板上开关</h4>
+<p>通过跳线和开关完成自检的动作</p>
+<h4>状态显示</h4>
+<ul>
+<li>字符显示</li>
+<li>LED灯</li>
+</ul>
+<h2>四、软件的移植</h2>
+<h3>1.代码</h3>
+<ul>
+<li>C/C++等高级语言易于移植<br />
+<em>事实上，移植面临工具的变换，编译器的替换可能会带来一些问题</em></li>
+<li>性能的非线性变化</li>
+<li>汇编语言一定需要重写<br />
+即使是同一厂商同一系列产品，也可能会增加新的特性</li>
+</ul>
+<h3>2.数据</h3>
+<h4>变量</h4>
+<ul>
+<li>数据类型的大小是目标相关的<br />
+对齐的自然边界也可能会有变化</li>
+<li>枚举类型的变化</li>
+</ul>
+<h4>函数</h4>
+<p>任何依赖函数入栈顺序的函数都是不可移植的</p>
+<h4>大/小端的问题</h4>
+<h3>3.实时性</h3>
+<ul>
+<li>非线性的性能</li>
+<li>
+中断的不同实现
+<ul>
+<li>尽可能用C编写ISR</li>
+<li>中断向量也使用C</li>
+</ul>
+</li>
+</ul>
+<h3>4.RTOS</h3>
+<p>通常还是习惯使用原有的RTOS，降低成本也减少学习负担</p>
+<ul>
+<li>RTOS增加了移植的复杂性<br />
+RTOS难免包含一些汇编代码</li>
+<li>
+RTOS需求的变化
+<ul>
+<li>良好的工具支持</li>
+<li>面向特定应用的能力</li>
+<li>更多可用组件</li>
+</ul>
+</li>
+</ul>
+<h3>5.EABI</h3>
+<p>嵌入式应用二进制接口</p>
+<ul>
+<li>编译器和调试器可以混用</li>
+<li>不同编译器产生的代码可以混合使用</li>
+<li>第三方的二进制库可以任意使用</li>
+</ul>
+<h4>强调的内容</h4>
+<h5>函数调用习惯</h5>
+<h5>寄存器的使用</h5>
+<ul>
+<li>专用寄存器</li>
+<li>易失性寄存器<br />
+在函数调用之后内容会改变，需要进行现场保护</li>
+<li>非易失性寄存器</li>
+</ul>
+<h5>栈帧</h5>
+<h5>数据类型</h5>
+<ul>
+<li>对齐规则</li>
+<li>大小端支持<br />
+通常不会混合支持</li>
+</ul>
+<h5>文件格式</h5>
+<ul>
+<li>目标文件：ELF</li>
+<li>
+调试信息：DWARF<br />
+Debug With Arbitrary Record Format
+<ul>
+<li>不同厂商对其进行了扩展</li>
+<li>扩展降低了互操作性</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

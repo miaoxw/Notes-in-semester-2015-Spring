@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>1 What Makes an Embedded Applicaion Tick</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>What Makes an Embedded Application Tick</h1>
+<h2>一、嵌入式系统的数量</h2>
+<ul>
+<li>
+美国家庭平均拥有40个微处理器<br />
+不包括：
+<ul>
+<li>电子计算机，包含5~10个</li>
+<li>汽车，包含几十个</li>
+</ul>
+</li>
+<li>接下来的几十年中将增加100倍<br />
+约以5年为周期的指数递增</li>
+<li>大多数人兵马俑意识到嵌入式设备的存在</li>
+</ul>
+<h2>二、开发的挑战</h2>
+<h3>1.多处理器</h3>
+<p>通常将不同的功能分配给不同的处理器执行</p>
+<ul>
+<li>主要的挑战在调试上<br />
+在单CPU上，调试嵌入式软件相对成熟<br />
+在多核上，调试增加的整体的困难</li>
+</ul>
+<h3>2.有限的内存</h3>
+<ul>
+<li>容量并不小，但不是想增加就能增加的</li>
+<li>成本与功耗考虑<br />
+不同档次面对不同的市场需求，形成产品线<br />
+<em>对传统嵌入式开发者而言，资源的增加是很奢侈的</em></li>
+<li>需要程序优化</li>
+<li>C++<br />
+有足够的理解才能使用，否则存储和实时性都可能存在问题</li>
+</ul>
+<h3>3.用户接口</h3>
+<p>非常重要，主要由软件来实现</p>
+<h4>理想步骤</h4>
+<ul>
+<li>设计硬件</li>
+<li>制作原型</li>
+<li>实现软件<br />
+主要是用户界面</li>
+<li>在设备上试用并进行精化和再实现</li>
+</ul>
+<h4>UI的开发问题</h4>
+<ul>
+<li>硬件不可用</li>
+<li>设计没有完成</li>
+<li>在宿主机上使用原型或仿真技术</li>
+</ul>
+<h3>3.可重用软件</h3>
+<p>传统的开发将软硬件都掌握在开发人员掌控下  </p>
+<p><strong>但现在不行</strong></p>
+<ul>
+<li>软件太大太复杂<br />
+开发人员不可能拥有所有专业技能</li>
+<li>推向市场的时间压力</li>
+<li>硬件重用在设计上被广泛接受，软件也理应如此</li>
+</ul>
+<h2>三、软件组件</h2>
+<h3>1.RTOS</h3>
+<ul>
+<li>有多种版本，可大可小</li>
+<li>需要对这些RTOS有足够的理解，了解互相的差异</li>
+</ul>
+<h4>RTOS选择的因素</h4>
+<ul>
+<li>硬实时</li>
+<li>版权费用</li>
+<li>技术支持</li>
+<li>工具</li>
+<li>易于使用</li>
+<li>网络的支持<br />
+在IoT的背景下需要更多地考虑</li>
+<li>CPU系列的支持</li>
+</ul>
+<h4>RTOS的标准</h4>
+<ul>
+<li>种类非常之多</li>
+<li>达到不同系统间的互操作性</li>
+</ul>
+<h5>常见标准</h5>
+<ul>
+<li>OSEK/VDX<br />
+在电子、汽车领域被广泛接受</li>
+<li>μiTRON<br />
+在日本被使用，可以在此基础上构建大量的中间件</li>
+<li>POSIX<br />
+从UNIX上移植</li>
+</ul>
+<h3>2.文件系统</h3>
+<ul>
+<li>嵌入式系统需要持久化的存储器<br />
+磁介质、光学、NVRAM……</li>
+<li>
+需要标准化的形式和方法
+<ul>
+<li>互操作性</li>
+<li>传输</li>
+</ul>
+</li>
+<li>MS-DOS是最好采用的</li>
+</ul>
+<h3>3.USB</h3>
+<ul>
+<li>越易用的东西实现越困难</li>
+<li>实现相应特性的部分是软件而非硬件</li>
+<li>协议要被宿主机和嵌入式设备支持</li>
+</ul>
+<h3>4.图形</h3>
+<h4>两大功能</h4>
+<ul>
+<li>图形输出</li>
+<li>用户交互</li>
+</ul>
+<h4>需求</h4>
+<p>需要额外的库提供图形输出的支持</p>
+<h3>5.网络</h3>
+<ul>
+<li>有线/无线</li>
+<li>TCP/IP可能是很好的选择<br />
+但在应用中使用会是挑战</li>
+</ul>
+<h4>IPv6</h4>
+<h4>谁需要服务器</h4>
+<p>对嵌入式系统而言，也就是C/S模式和B/S模式的选择</p>
+<ul>
+<li>使用自定的协议和接口以客户端访问</li>
+<li>通过网络协议以Web方式访问</li>
+</ul>
+<h4>SNMP与Web Server</h4>
+<h5>SNMP</h5>
+<ul>
+<li>内置的复杂安全特性</li>
+<li>MIB（管理信息库）可被轻易地添加</li>
+<li>浏览器格式固定</li>
+<li>浏览器需要付费</li>
+</ul>
+<h5>Web Server</h5>
+<ul>
+<li>可使用SSL</li>
+<li>HTML与直接编码</li>
+<li>接口可由应用程序定制</li>
+<li>浏览器免费</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

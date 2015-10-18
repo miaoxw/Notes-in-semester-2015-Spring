@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>2 Design and Development</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>2 Design and Development</h1>
+<h2>一、演变中的嵌入式系统软件开发技术</h2>
+<h3>1.微处理器技术</h3>
+<ul>
+<li>基于硅的半导体技术不断发展</li>
+<li>不断复杂的应用需求</li>
+<li>以RISC为代表的架构的流行</li>
+<li>对软件的设计也产生了影响<br />
+需要工具提供广泛、一致的支持，以及相关产品的细化和演化</li>
+</ul>
+<p>带来的不是技术上的更替，而是更大的选择范围<br />
+新的技术不代表对老技术的抛弃</p>
+<h3>2.系统架构</h3>
+<ul>
+<li>单处理器+逻辑设备</li>
+<li>更多集成设备<br />
+芯片数量减少</li>
+</ul>
+<h4>多处理器</h4>
+<ul>
+<li>功耗分布化</li>
+<li>每个处理器实现特定的功能</li>
+<li>对调试造成新的挑战</li>
+</ul>
+<h3>3.设计的组合途径</h3>
+<ul>
+<li>早期，软件所占比例在5~10%左右<br />
+硬件优先的设计阶段，整个软件相对简单<br />
+以asm和C为主</li>
+<li>后期的软件比重逐渐增加，从50%到70~的份额</li>
+</ul>
+<p>软件的开发从单人方式逐渐演化出团队的形式，需要用更短的时间开发出更大、更复杂的软件，使得软件的测试工具产生了更高效的需求</p>
+<h4>软件的内容</h4>
+<ul>
+<li>无OS</li>
+<li>使用RTOS</li>
+<li>增加中间件等其它可复用的软件组件</li>
+</ul>
+<p>完全自己开发的代码比例在逐渐减少，外来部分的比重越来越大<br />
+TTM的要求迫使我们使用外部引入的软件</p>
+<h3>4.编程语言</h3>
+<h4>4/8位处理器时代</h4>
+<p>基本采用asm</p>
+<h4>16位处理器时代</h4>
+<p>对高级语言的需求更加明显</p>
+<ul>
+<li>Pascal</li>
+<li>C<br />
+针对嵌入式做出了相应的改变</li>
+</ul>
+<h4>32位处理器时代</h4>
+<ul>
+<li>C与Ada</li>
+<li>OO的优势使得C++的比例也有增长</li>
+<li>设计和分析方面，2000年之后UML变得非常流行<br />
+<em>搜索关键词：实时 UML</em></li>
+</ul>
+<h3>5.软件团队规模与分散</h3>
+<ul>
+<li>传统的单人专家模式<br />
+也存在好处，问题很容易定位</li>
+<li>每个人不可能熟悉所有范畴的内容，因此产生软件团队</li>
+<li>使用C语言仍然需要每个人都知道一些系统的细节问题</li>
+<li>可重用的软件组件需求</li>
+</ul>
+<h3>6.UML与建模</h3>
+<ul>
+<li>良好的设计方法</li>
+<li>可以被用于写代码的指导</li>
+<li>也可以直接用于生成代码<br />
+<em>然而生成的代码未必可用</em><br />
+使用这些代码存在争议，基于对资源高效使用的要求，性能未必足够地好</li>
+</ul>
+<h3>7.关键技术</h3>
+<h4>微处理器技术</h4>
+<p>兼容的工具与RTOS产品</p>
+<h4>系统架构</h4>
+<p>调试技术</p>
+<h4>设计组件</h4>
+<ul>
+<li>指令集仿真器</li>
+<li>基于宿主机的圆形</li>
+<li>片上调试设备</li>
+<li>软硬件协同验证</li>
+</ul>
+<h4>软件内容</h4>
+<ul>
+<li>标准化的RTOS技术</li>
+<li>调试技术</li>
+</ul>
+<h4>变成语言</h4>
+<ul>
+<li>C语言工具</li>
+<li>C++的产品</li>
+</ul>
+<h4>团队的大小</h4>
+<ul>
+<li>OOP</li>
+<li>标准API的RTOS</li>
+</ul>
+<h2>二、选择开发工具</h2>
+<h3>1.开发工具链</h3>
+<ul>
+<li>语言的常规交叉编译器</li>
+<li>汇编器</li>
+<li>链接器<br />
+库</li>
+<li>调试器</li>
+</ul>
+<h3>2.编译器的特征</h3>
+<h4>接受的编程语言</h4>
+<ul>
+<li>是否兼容ANSI C？</li>
+<li>是否兼容其它规范？</li>
+</ul>
+<h4>提供的库</h4>
+<ul>
+<li>并不需要完整的运行时库</li>
+<li>C语言的库函数并没有定义为可重入的<br />
+需要源代码来保证可重入性</li>
+<li>C++的类库支持</li>
+</ul>
+<h4>支持完整的处理器家族</h4>
+<ul>
+<li>嵌入式设备变化较快，处理器的更改可能很频繁但变化都不大</li>
+<li>升级成本最小的自然是在同系列处理器中选择<br />
+代码的移植相对便捷</li>
+</ul>
+<h4>制造商的支持</h4>
+<h3>3.嵌入式系统上的扩展</h3>
+<p>由于嵌入式编译器生成的代码对目标平台没有任何假设，因此需要额外的功能来解决这些复杂性</p>
+<ul>
+<li>支持复杂的内存配置<br />
+如静态变量的初始化策略</li>
+<li>直接访问特定内存地址</li>
+<li>内嵌汇编<br />
+出于性能考虑，使用汇编语言可能是无法避免的<br />
+使用高级语言，丢弃了对寄存器的控制能力<br />
+这部分功能如果需要重新找回，就自然需要使用汇编</li>
+</ul>
+<h3>4.实时系统的要求</h3>
+<ul>
+<li>中断<br />
+特殊的<code>interrupt</code>关键字<br />
+上下文的保存与恢复</li>
+<li>可重入代码</li>
+<li>存储布局<br />
+<code>pack</code>与<code>unpack</code>关键字控制内存对齐<br />
+存在空间与性能的平衡</li>
+<li><code>volatile</code>关键字<br />
+告知此变量的值可能被改变，编译器不进行任何优化<br />
+很多编译器对此非标准关键字提供扩展支持</li>
+</ul>
+<h3>5.优化</h3>
+<ul>
+<li>最终目标是优化的代码与人工编写的asm匹敌</li>
+<li>一些优化可以不考虑处理器</li>
+<li>但<strong>指令调度</strong>、<strong>函数的内联<strong>、</strong><code>switch</code>语句</strong>等优化需要针对特定处理器进行</li>
+<li>优化必须进行人为的精细控制</li>
+</ul>
+<h3>6.构建工具的关键问题</h3>
+<ul>
+<li>对嵌入式系统的特殊需求提供广泛的支持</li>
+<li>高标准的优化能力，支持用户对整个过程的干预</li>
+</ul>
+<h3>7.调试工具的特征</h3>
+<h4>调试完全优化的代码</h4>
+<p>通常在初期对优化程度不高的代码进行调试，后期使用优化最大化的代码形式</p>
+<h4>支持高层次操作</h4>
+<p>以适当的形式访问相应的代码和数据</p>
+<h4>C++的额外需求</h4>
+<h4>脚本支持</h4>
+<p>给用户提供灵活的手段，使工具适应不同的应用</p>
+<h3>8.开发阶段</h3>
+<ul>
+<li>初始阶段：硬件未定义<br />
+在此阶段可以做一些算法和创意的尝试，以及软件工具的尝试</li>
+<li>硬件被定义，但不可用<br />
+硬件没有全部完成，可以做一些详细设计</li>
+<li>硬件可用但不稳定<br />
+提供了软硬件集成的机会</li>
+<li>产品级的硬件可用<br />
+可以进行完整的集成</li>
+<li>系统发布<br />
+软件已经过调优</li>
+</ul>
+<h4>本地调试器</h4>
+<ul>
+<li>在宿主机中用宿主机的代码进行调试</li>
+<li>在阶段1中有效<br />
+验证算法和创意</li>
+<li>如果与最终的嵌入式调试器UI相似，可以用来熟悉工具</li>
+<li>在注重逻辑计算方面时，本地调试器会更加易用</li>
+</ul>
+<h4>带有模拟器的调试器</h4>
+<ul>
+<li>在主机中模拟目标芯片指令的执行</li>
+<li>在阶段2中有效</li>
+<li>硬件配置已知，通过配置可以设定模拟器环境，加快开发进程</li>
+<li>提供了详细的信息</li>
+<li>需要支持中断和I/O</li>
+<li>对性能分析和代码覆盖能提供很好的支持</li>
+</ul>
+<h4>带ICE界面的在线仿真</h4>
+<ul>
+<li>很少使用</li>
+<li>可以完整地定位问题，但目前做此类调试器的成本越来越高</li>
+<li>成本和可用性抑制了它的发展</li>
+<li>在阶段3中非常理想</li>
+</ul>
+<h4>带监视器的调试器</h4>
+<ul>
+<li>需要稳定和全功能的硬件<br />
+也就定义了在阶段4/5中使用</li>
+<li>在目标机上使用</li>
+<li>目标机上运行一个很小的监视程序<br />
+期望此程序对机器的负载不产生任何影响</li>
+<li>在最理想的情况下，监视程序也可以捆绑在程序中一起发布</li>
+<li>成本最为低廉，<em>严格意义上</em>不能作为最终产品的完全模拟</li>
+</ul>
+<h4>片上调试</h4>
+<ul>
+<li>需要额外的连接</li>
+<li>如JTAG</li>
+</ul>
+<h4>对RTOS的调试</h4>
+<ul>
+<li>要能感知断点</li>
+<li>要访问特定实际任务的数据</li>
+<li>要能访问中间状态</li>
+</ul>
+<h3>9.调试工具的关键因素</h3>
+<ul>
+<li>是否允许完整优化的代码</li>
+<li>工具提供对广泛执行环境的支持和选择</li>
+</ul>
+<h4>其它选择因素</h4>
+<ul>
+<li>目标芯片</li>
+<li>主机环境</li>
+<li>RTOS</li>
+</ul>
+<h3>10.嵌入式软件与UML</h3>
+<h4>模型的不同含义</h4>
+<h5>草图</h5>
+<ul>
+<li>很简单的记录，用于记录当时的想法</li>
+<li>初步交流的方法</li>
+<li>不需要完整，不需要进行维护</li>
+</ul>
+<h5>蓝图</h5>
+<ul>
+<li>构造计划书</li>
+<li>反映出需要构建的事物</li>
+<li>利用UML构建复杂的软件蓝图</li>
+<li><em>蓝图很少被严格遵守</em><br />
+蓝图到实现的转换或多或少都会有一些转换</li>
+</ul>
+<h5>可执行原型</h5>
+<ul>
+<li>对系统行为以确定的方式进行了描述</li>
+<li>不需要再与实际产物进行区别</li>
+</ul>
+<h4>软件开发的演变</h4>
+<p>汇编-&gt;高级语言-&gt;UML</p>
+<ul>
+<li>计算成本降低</li>
+<li>系统复杂性越来越高</li>
+<li>生产力提高<br />
+高级语言转化为更多的低级语言</li>
+</ul>
+<p>这也意味着抽象程度越来越高，系统的复杂性也越来越高</p>
+<h5>基于模型与基于代码的设计相比的优势</h5>
+<ul>
+<li>缺陷的发现时间被提前</li>
+<li>有利于更好地进行开发</li>
+</ul>
+<h4>基于蓝图的开发过程</h4>
+<ul>
+<li>利用UML构建分析模型</li>
+<li>构建设计模型<br />
+可能需要嵌入式系统的专门工具</li>
+<li>从模型自动生成代码</li>
+</ul>
+<p><em>自动转换的代码难免令人产生怀疑，现阶段的使用范围十分有限，传统嵌入式开发工程师处于掌控欲的需要，可能对此难以接受</em></p>
+<h4>模型编译器</h4>
+<ul>
+<li>将UML转换到C/C++代码</li>
+<li>不同的软件平台有不同的编译器<br />
+共性部分可以复用</li>
+</ul>
+<h5>应用与架构分离</h5>
+<ul>
+<li>领域专家设计应用</li>
+<li>嵌入式工程师设计地城架构</li>
+</ul>
+<h4>术语表</h4>
+<p>（略）</p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

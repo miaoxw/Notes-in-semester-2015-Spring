@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ch3 OpenMP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>OpenMP<em>2.5</em></h1>
+<p>有底层API后，就已经可以实现并行编程；然而，很多时候串行算法已经成型，如果继续使用原有的底层API，还将面临转换和调试的问题。OpenMP正是为了解决这样的问题。</p>
+<h2>一、OpenMP的介绍</h2>
+<h3>1.概览</h3>
+<ul>
+<li>提供线程级别的并行模型</li>
+<li>基于共享内存的模型</li>
+<li>本身只是提供一种规范<br />
+具体的实现由各个系统和编译器负责实现</li>
+</ul>
+<h3>2.本质</h3>
+<ul>
+<li>一套多线程的API</li>
+<li>面向程序员的高层接口</li>
+<li>提供一系列的编译和预处理的指导语句</li>
+<li>主要提供Fortran、C、C++的多线程支持</li>
+<li>以SMP的物理结构完成多线程的实现</li>
+</ul>
+<h3>3.实现层次</h3>
+<ul>
+<li>编译时的指导语句</li>
+<li>库函数的支持</li>
+<li>环境变量的支持</li>
+<li>OpenMP的标准可以实现在任何编译器上<br />
+<em>不同的编译器支持程度不同</em></li>
+</ul>
+<h3>4.历史</h3>
+<p>（略）</p>
+<h3>5.OpenMP的目标</h3>
+<h4>标准化</h4>
+<ul>
+<li>在不同的语言和架构上都可以以相同的方式编写多核程序</li>
+</ul>
+<h4>简洁有效</h4>
+<ul>
+<li>编译器的指导语句尽可能地少</li>
+</ul>
+<h4>易用性</h4>
+<ul>
+<li>允许程序逐步并行化</li>
+<li>使对串行程序的修改尽可能地少</li>
+</ul>
+<h4>可移植性</h4>
+<ul>
+<li>多种语言</li>
+<li>不同平台</li>
+</ul>
+<h3>6.OpenMP编程模型</h3>
+<h4>共享内存、基于线程的并行模型</h4>
+<h4>显式并行</h4>
+<h4>Fork-Join模型</h4>
+<ul>
+<li>程序启动后是单线程</li>
+<li>达到需要并行的部分（<strong>并行区</strong>）时，产生多个线程同时运行</li>
+<li>所有线程同时执行完后互相等待，一起结束</li>
+</ul>
+<h4>基于编译器指导语句</h4>
+<h4>支持嵌套并行</h4>
+<h4>动态线程的创建与销毁</h4>
+<p>线程的数量可以由OpenMP自适应</p>
+<h4>I/O</h4>
+<ul>
+<li>OpenMP并没有指定I/O的接口，仍然按原有的方式进行读写</li>
+<li>因此并行区中的读写会面临冲突的问题，需要程序员自己解决</li>
+</ul>
+<h4>内存模型</h4>
+<h3>7.OpenMP的层次</h3>
+<ul>
+<li>SMP的硬件结构</li>
+<li>系统的线程支持与OpenMP的运行时库</li>
+<li>编译器指导语句、库函数和环境变量</li>
+<li>应用程序和最终用户</li>
+</ul>
+<h3>8.示例代码</h3>
+<pre><code>#include &lt;omp.h&gt;
+
+void main()
+{
+    #pragma omp parallel            //编译指导语句，将大括号括起的范围内做成一个并行区
+    {
+        int ID=omp_get_thread_num();
+        printf(&quot;hello(%d)&quot;,ID);
+        printf(&quot;world(%d)\n&quot;,ID);
+    }
+}
+</code></pre>
+
+<p>编译时，需要增加参数<code>-fopenmp</code>（gcc）、<code>-mp</code>（pgi）、<code>/Qopenmp</code>（Intel）、<code>/openmp</code>（Visual Studio，或直接在项目属性中添加OpenMP支持）</p>
+<h4>更一般的形式</h4>
+<pre><code>#include &lt;omp.h&gt;
+
+int main()
+{
+    int v1,v2,v3;
+    //Serial code
+    #pragma omp parallel private(v1,v2) shared(v3)
+    {
+        //
+        //Join
+    }
+    //Back to serial code
+}
+</code></pre>
+
+<ul>
+<li>大括号必须紧跟编译指导语句书写</li>
+<li>语法格式是固定的</li>
+</ul>
+<h2>二、创建线程</h2>
+<h3>1.Fork-Join结构</h3>
+<ul>
+<li>主线程按那些创建一组线程执行并行任务</li>
+<li>
+并行区完全可以嵌套
+<ul>
+<li>并行区中，主线程担任一个线程的工作</li>
+<li>子并行区中，仍有相应概念上的主线程</li>
+</ul>
+</li>
+</ul>
+<h3>2.指定线程的个数</h3>
+<p>虽然线程个数可以由OpenMP自动指定，但是也可以手动设置</p>
+<pre><code>omp_set_num_threads(4);
+</code></pre>
+
+<p>这使得此函数之后的每个并行区都是4个线程同时运行</p>
+<p>也可以使用指导语句，这样只对一个并行区生效</p>
+<pre><code>#pragma omp parallel num_threads(4)
+</code></pre>
+
+<h2>三、同步方式</h2>
+<h3>1.临界区</h3>
+<p>多线程同时只能由一个进入临界区执行</p>
+<pre><code>float res;
+
+#pragma omp parallel
+{
+    float B;
+    int i,id,nthrds;
+    id=omp_get_thread_num();        //当前线程的ID
+    nthrds=omp_get_num_threads();   //当前的线程个数
+    for(i=id,i&lt;niters;i+=thrds)     //巧妙的for循环，尽可能将循环任务平均地分配到各线程中去
+    {
+        B=big_job(i);
+        #pragma omp critical
+            consume(B,res);
+    }
+}
+</code></pre>
+
+<h3>2.原子操作</h3>
+<p>原子操作不会被多线程打断<br />
+<em>然而原子操作和临界区的功能是一样的，因为有复合语句的存在，原子操作的功能实际上还要弱一些</em><br />
+原子操作中不能使用复合语句，也不能进行函数调用</p>
+<pre><code>#pragma omp parallel
+{
+    double tmp,B;
+    B=DOIT();
+    tmp=big_ugly(B);
+    #pragma omp atomic
+        X+=tmp;
+}
+</code></pre>
+
+<ul>
+<li>提供原子操作的意义在于<strong>效率</strong><br />
+使用原子操作的效率，比使用临界区要高很多，因为可以调用一些系统底层的特殊功能来实现原子操作</li>
+</ul>
+<h3>3.路障同步</h3>
+<h3>4.同步次序</h3>
+<h3>5.flush</h3>
+<h3>6.锁</h3>
+<h2>四、并行循环</h2>
+<h3>1.SPMD与worksharing</h3>
+<ul>
+<li>工作共享创建了一个Single Program Multiple Data的程序结构</li>
+<li>使得多个线程以看起来一样的代码完成不同的工作</li>
+</ul>
+<h3>2.分配循环用的worksharing</h3>
+<pre><code>#pragma omp for
+    for(i=0;i&lt;N;i++)
+    {
+        something();
+    }
+</code></pre>
+
+<ul>
+<li>i将自动地成为每个线程的私有变量</li>
+<li>默认得到{0,1,2,3},{4,5,6,7},...这样的循环划分方法<br />
+可以调整，但无法任意划分</li>
+</ul>
+<h3>3.worksharing的结构特点</h3>
+<ul>
+<li>worksharing结构<strong>不会</strong>创建线程<br />
+仅仅对执行做分配</li>
+<li>worksharing结构在入口没有路障同步，但出口处有<br />
+而且都是隐式的</li>
+</ul>
+<h3>4.worksharing结构的限制</h3>
+<ul>
+<li>必须放在并行区内</li>
+<li>待分配的任务无法执行一部分，要么整个分配，要么不分配</li>
+<li>分配时有固定的次序，不支持自定义的次序<br />
+也不会随机分配</li>
+</ul>
+<h3>5.worksharing结构的类型</h3>
+<ul>
+<li>section可以进行手动分配</li>
+<li>single可以分配给单个线程</li>
+</ul>
+<h3>6.parallel与worksharing的组合</h3>
+<pre><code>double res[MAX];
+int i;
+#pragma omp parallel for
+    for(i=0;i&lt;MAX;i++)
+        res[i]=huge();
+</code></pre>
+
+<h3>7.规约</h3>
+<ul>
+<li>OpenMP提供的特殊、常见数据类型的支持</li>
+</ul>
+<h4>编译指导语句的基本格式</h4>
+<pre><code>#pragma omp directive-name [clause,...] newline
+</code></pre>
+
+<h4>规约指导语句</h4>
+<pre><code>reduction(op:list)
+</code></pre>
+
+<h4>归约操作的操作符和初始值</h4>
+<ul>
+<li>由OpenMP规定</li>
+<li>无法自行定义</li>
+</ul>
+<h2>五、同步</h2>
+<h3>1.Barrier</h3>
+<pre><code>#pragma omp barrier             //手动的路障同步
+#pragma omp for nowait          //指明取消末尾的隐式路障同步
+</code></pre>
+
+<ul>
+<li>直到所有线程执行到此位置才继续执行</li>
+<li>离开临界区时有隐式的路障同步</li>
+</ul>
+<h3>2.Master结构</h3>
+<ul>
+<li>标记一个代码块只被一个线程执行</li>
+<li>其它线程简单跳过</li>
+<li>默认没有路障同步，需要显式指定</li>
+</ul>
+<h3>3.Single结构</h3>
+<ul>
+<li>此结构中的内容只有一个线程执行</li>
+<li>可能由任何一个线程执行，未必是master线程</li>
+<li>出口处有隐式的路障同步</li>
+</ul>
+<h3>4.ordered</h3>
+<ul>
+<li>只加在for循环后</li>
+<li>表明for循环存在次序依赖<br />
+标记出的语句将按照for循环的<strong>串行迭代序</strong>被执行</li>
+<li>对性能将产生很大的影响</li>
+</ul>
+<h3>5.锁</h3>
+<h4>简单锁</h4>
+<p>可以认为是简单的布尔变量<br />
+omp_*_lock</p>
+<ul>
+<li>init</li>
+<li>set</li>
+<li>unset</li>
+<li>test</li>
+<li>destroy</li>
+</ul>
+<h4>嵌套锁</h4>
+<p>与简单锁不同，可以被同一个进程反复地加锁，解锁时也要进行相应数量的解锁<br />
+omp_*_nest_lock</p>
+<ul>
+<li>init</li>
+<li>set</li>
+<li>unset</li>
+<li>test</li>
+<li>destroy</li>
+</ul>
+<h4>简单锁的例子</h4>
+<pre><code>#include &lt;omp.h&gt;
+omp_lock_t lock;
+omp_init_lock(&amp;lck);
+
+#pragma omp parallel private(tmp,id)
+{
+    id=omp_get_thread_num();
+    tmp=do_lots_of_work(id);
+    omp_set_lock(&amp;lock);
+    omp_unset_lock(&amp;lock);
+}
+omp_destroy_lock(&amp;lock);
+</code></pre>
+
+<h2>六、OpenMP的库函数</h2>
+<h3>1.修改、设置线程数量</h3>
+<ul>
+<li><code>omp_set_num_threads(int)</code></li>
+<li><code>omp_get_num_threads()</code><br />
+获取此韩式调用时的线程数量</li>
+<li><code>omp_get_thread_num()</code><br />
+获取当前线程的线程号</li>
+<li><code>omp_get_max_threads()</code><br />
+获取<strong>下一个开辟的并行区</strong>每个线程要开启的线程数</li>
+</ul>
+<h3>2.是否在并行区域内</h3>
+<ul>
+<li><code>omp_in_parallel()</code></li>
+</ul>
+<h3>3.是否允许系统动态调整线程数量</h3>
+<ul>
+<li><code>omp_set_dynamic(int)</code></li>
+<li><code>omp_get_dynamic()</code></li>
+</ul>
+<h3>4.系统处理器数量</h3>
+<ul>
+<li><code>omp_num_procs()</code></li>
+</ul>
+<h3>5.环境变量</h3>
+<p>环境变量的优先级比库函数要低一些</p>
+<ul>
+<li>OMP_NUM_THREADS</li>
+<li>OMP_SCHEDULE<br />
+设置for循环是横切或竖切</li>
+</ul>
+<h2>七、数据环境</h2>
+<h3>1.默认存储属性</h3>
+<ul>
+<li>共享内存的编程模型</li>
+<li>全局变量在线程间共享</li>
+<li>静态变量是共享的</li>
+<li>堆内存是共享的<br />
+动态分配的内存</li>
+</ul>
+<h4>默认情况下的私有变量</h4>
+<ul>
+<li>并行区内定义的变量</li>
+</ul>
+<h3>2.private子句</h3>
+<ul>
+<li>为变量创建每个线程一份的副本</li>
+<li>未经初始化的变量，在OpenMP中的初始值未被定义<br />
+主流平台上，private变量的修改对外围没有改变</li>
+<li>外部变量作为私有变量，对定义为私有变量的变量的修改，修改谁并没有明确的定义<br />
+<em>实际平台上的主流编译器都修改全局变量</em></li>
+</ul>
+<h3>3.firstprivate与lastprivate子句</h3>
+<ul>
+<li>和private子句几乎相同</li>
+<li>firstprivate<br />
+私有变量的初值定义为全局变量原先的值</li>
+<li>lastprivate<br />
+出并行区时，全局变量的值将被改变<br />
+通常执行的最后一条更新的值反映到全局变量中</li>
+</ul>
+<h3>4.default子句</h3>
+<pre><code>default(PRIVATE|SHARED|NONE)
+</code></pre>
+
+<ul>
+<li><code>default(SHARED)</code>是默认存在的，因此不需写出来<br />
+<code>#pragma omp task</code>除外</li>
+<li>在C中，<code>default(PRIVATE)</code>不被支持</li>
+<li><code>default(NONE)</code>将不为变量设定默认值<br />
+此时必须为每个变量<strong>显式</strong>指定属性<br />
+<em>良好的自虐的编程实践~</em><br />
+通常只在需要编译器提醒哪个变量没有指定属性时才使用</li>
+</ul>
+<h3>5.threadprivate子句</h3>
+<pre><code>int counter=0;
+#pragma omp threadprivate(counter)
+</code></pre>
+
+<ul>
+<li>定义为<code>threadprivate</code>的变量是可以穿越多个并行区的<br />
+变量的值以线程号一一对应</li>
+</ul>
+<h4>copyin子句</h4>
+<pre><code>int a=100;
+#pragma omp threadprivate copyin(a)
+</code></pre>
+
+<ul>
+<li>可以将全局变量的值拷贝进对应的私有变量</li>
+</ul>
+<h4>copyprivate子句</h4>
+<ul>
+<li>只能在single中使用</li>
+<li>在路障同步点处由执行single的线程拷贝到所有其它线程</li>
+</ul>
+<h4>指针的传递</h4>
+<ul>
+<li>
+<p>在线程之间，指针不要随便乱传</p>
+<pre><code>#pragma omp parallel private(x) shared(p0,p1)
+x=...;
+p0=&amp;x;
+</code></pre>
+
+<p>在另一个线程中使用p0指针会造成不可预料的后果</p>
+</li>
+</ul>
+<h2>八、Schedule子句</h2>
+<h3>1.section子句</h3>
+<pre><code>#pragma omp parallel
+{
+    #pragma omp sections
+    {
+        #pragma omp section
+        calculation1();
+        #pragma omp section
+        calculation2();
+        #pragma omp section
+        calculation3();
+    }
+}
+</code></pre>
+
+<ul>
+<li>这些任务由系统自由分配给不同线程运行</li>
+<li>任务数与线程数相等时，分配显然</li>
+<li>任务数多于线程数时<br />
+先用任务把线程占满，哪个线程执行完在分配剩下的任务</li>
+<li>任务数少于线程数时<br />
+其它线程等待</li>
+</ul>
+<h3>2.schedule子句</h3>
+<pre><code>schedule(mode[,chunk])
+</code></pre>
+
+<p><em>实际上大多数编译器除了static，另外三种都没实现</em></p>
+<h4>静态调度</h4>
+<ul>
+<li>所有分配方式在编码时写死</li>
+<li>默认的分配方式</li>
+<li>chunk默认为最大值（迭代数/线程数）<br />
+chunk是循环任务分块的大小<br />
+如果需要循环纵切，<strong>chunk设置为1</strong>即可</li>
+<li>静态调度的分配方式是非常明确的，第一个chunk给线程0，以此类推</li>
+</ul>
+<h4>动态调度</h4>
+<ul>
+<li>每个chunk可以动态分配给某个线程了</li>
+</ul>
+<h4>guided调度</h4>
+<ul>
+<li>chunk定义的是块的最小值</li>
+<li>实际上可以更大</li>
+</ul>
+<h4>runtime调度</h4>
+<ul>
+<li>全部参数交由编译器决定</li>
+</ul>
+<h2>九、内存模型</h2>
+<h3>1.弱一致性</h3>
+<ul>
+<li>在代码中，读写顺序在不改变语义的情况下是可以改变的 </li>
+<li>以S表示<strong>数据</strong>同步操作<br />
+OpenMP中保证，S-&gt;W、S-&gt;R、R-&gt;S、W-&gt;S、S-&gt;S<br />
+在OpenMP中就是flush操作</li>
+</ul>
+<h3>2.flush</h3>
+<pre><code>a=...;
+&lt;other computaion&gt;
+#pragma omp flush(a)
+</code></pre>
+
+<ul>
+<li>变量值在内存中的改变最早发生在写操作，最晚在数据同步操作时进行</li>
+</ul>
+<h4>隐式数据同步</h4>
+<p>其它所有同步都会自动带上数据同步</p>
+<h2>十、OpenMP 3.0与任务</h2>
+<h3>1.任务</h3>
+<ul>
+<li>其它结构的工作量都是静态的，但task的任务是可以动态分的</li>
+</ul>
+<h3>2.例子</h3>
+<pre><code>for(int i=0;i&lt;N;i+=a[i])
+    task(a[i]);
+</code></pre>
+
+<ul>
+<li>此循环不能使用<code>#pragma omp for</code></li>
+<li>想要并行就必须使用task</li>
+</ul>
+<h3>3.task的结构</h3>
+<pre><code>#pragma omp task [clause[[,],clause]...]
+</code></pre>
+
+<ul>
+<li>子句可以加入<code>if</code>、<code>untitled</code>与所有数据环境</li>
+</ul>
+<h4>并行的链表举例</h4>
+<pre><code>#pragma omp parallel
+{
+    #pragma omp single private(p)   //由一个线程进行预处理，其它线程什么都不做
+    {
+        p=listhead;
+        while(p)
+        {
+            #pragma omp task
+            process(p);             //将链表内多个结点的处理并行进行，
+                                    //占用并行区内原本闲置的线程
+            p=next(p);
+        }
+    }
+}
+</code></pre>
+
+<h3>4.untied子句</h3>
+<ul>
+<li>创建的任务，默认将会与某个线程绑定，只能由某个线程来完成</li>
+<li><code>untied</code>可以用来解除这样的绑定</li>
+</ul>
+<h4>举例</h4>
+<pre><code>#pragma omp single
+{
+    #pragma omp task untied
+    for(i=0;i&lt;ONEZILLION;i++)
+        #pragma omp task
+        process(item[i]);
+}
+</code></pre>
+
+<ul>
+<li>如果不作为united的任务，源源不断的新任务将撑爆内存</li>
+<li>untied允许任务的创建在其它线程间迁移</li>
+</ul>
+<h3>5.if子句</h3>
+<ul>
+<li>如果表达式为<code>false</code>，整个编译指导语句无效</li>
+<li>默认为<code>if(true)</code></li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

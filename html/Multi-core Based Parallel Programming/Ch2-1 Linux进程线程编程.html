@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ch2-1 Linux进程线程编程</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Linux进程线程编程</h1>
+<h2>一、Linux进程</h2>
+<h3>1.main函数的入口</h3>
+<h4>crt0.o</h4>
+<ul>
+<li>Linux下的实际入口</li>
+<li>此文件中的内容是固定的</li>
+<li>此入口调用main函数<br />
+因此main函数返回之后还能进行一些处理工作</li>
+<li>cc/ld时自动链接</li>
+</ul>
+<h4>main函数</h4>
+<pre><code>int main(int argc char *argv[])
+</code></pre>
+
+<h3>2.exec系列函数的使用</h3>
+<p>都用于启动一个新程序，切换到新的上下文
+	#include &lt;unistd.h&gt;</p>
+<pre><code>int execl(const char *path,const char *arg0,...,(char *)0);
+int execlp(const char *file,const char *arg0,...,(char *)0);
+int execle(const char *path,conse char *arg0,...,(char *)0,char *const envp[])
+int execv(const char *path,char *const argv[]);
+int execvp(const char *path,char *const argv[]);
+int execve(const char *path,char *const argv[],char *const envp[])
+</code></pre>
+
+<ul>
+<li>所有带l的系统调用，参数均以可变的方式提供</li>
+<li>带p时给文件名即可</li>
+<li>带e的系统调用还可修改当前的环境变量</li>
+<li>exec函数并不产生新的进程，只将当前进程的任务替换为执行新的任务<br />
+返回后继续执行原来的任务</li>
+</ul>
+<h3>3.fork的使用</h3>
+<pre><code>#include &lt;sys/tyoes.h&gt;
+#include &lt;unistd.h&gt;
+
+pid_t fork();
+</code></pre>
+
+<ul>
+<li>执行fork后有两个线程执行同一段代码</li>
+<li>返回值为新PID的为原线程，继续执行<br />
+新创建的进程获得的fork的返回值为0</li>
+</ul>
+<h4>fork的使用范例</h4>
+<pre><code>if(fork()==0)
+{
+    //子进程代码段
+}
+else
+{
+    //父进程代码段
+}
+</code></pre>
+
+<p>将fork与exec两种系统调用结合起来，就可以创建新进程执行其它任务</p>
+<h3>4.结束进程</h3>
+<h4>正常退出</h4>
+<ul>
+<li>从main函数返回</li>
+<li>调用<code>exit</code>函数</li>
+<li>
+<p>调用<code>_exit</code>函数<br />
+<code>exit</code>是C库函数，<code>_exit</code>是系统调用<br />
+系统调用更贴近底层，可以立即结束一个进程  
+</p>
+<ul>
+<li><em>换而言之，<code>exit</code>还会做一些清理工作</em><br />
+调用各种终止处理程序、清理标准I/O，最终才调用<code>_exit</code></li>
+<li>
+<p><strong>终止处理程序</strong><br />
+可以自行编写，使用<code>atexit</code>函数</p>
+<pre><code>#include &lt;stdlib.h&gt;
+int atexit(void (*function)(void));//向C库注册
+</code></pre>
+
+<p>注册终止处理程序的本质是注册处理程序的入口地址</p>
+</li>
+</ul>
+</li>
+<li>多线程程序的最后一个线程退出</li>
+</ul>
+<h4>非正常结束</h4>
+<ul>
+<li>调用<code>abort</code>函数</li>
+<li>被<code>kill</code>发送信号</li>
+<li>最后一个线程被取消</li>
+</ul>
+<h3>5.进程资源</h3>
+<p>struct task_struct（进程描述符）<br />
+内部非常复杂，此处略过不讲</p>
+<h4>其它资源</h4>
+<ul>
+<li>线程信息</li>
+<li>文件信息</li>
+<li>进程接受的信号信息</li>
+<li>系统空间栈</li>
+</ul>
+<h3>6.wait与waitpid</h3>
+<p>主要用于父子进程之间，等待进程结束</p>
+<h4>原型</h4>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+pit_t wait(int *status);            //由父进程调用，等待任意一个子进程
+pid_t waitpid(pid_t pid,int *status,int options);
+</code></pre>
+
+<ul>
+<li>status用于收集被等待进程的返回值等信息</li>
+<li>options可以使waitpid非阻塞</li>
+</ul>
+<h4>可能结果</h4>
+<ul>
+<li>阻塞</li>
+<li>立即返回</li>
+<li>出错</li>
+</ul>
+<h4>实现原理</h4>
+<ul>
+<li>每个Linux下的进程在执行完毕后并不立即回收<br />
+只有在父进程调用wait时才会将其资源释放出来</li>
+<li>父进程调用<code>wait</code>时，将在系统中寻找其子进程的僵尸进程，并返回其pid</li>
+</ul>
+<h4>waitpid</h4>
+<ul>
+<li>指定PID</li>
+<li>非阻塞<br />
+由options实现，置为<code>WNOHANG</code>即可，从而瞬时地看一下是否已经存在符合等待条件的僵尸进程</li>
+</ul>
+<h5>pid参数</h5>
+<ul>
+<li>-1<br />
+waitpid此时退化为wait</li>
+<li>&gt;0<br />
+等待对应PID的进程</li>
+<li>==0<br />
+回收当前进程组的子进程</li>
+<li>&lt;0<br />
+此参数为进程组组号</li>
+</ul>
+<h2>二、信号</h2>
+<h3>1.信号的概念</h3>
+<ul>
+<li>本质是一个软中断</li>
+<li>提供了处理异步事件的机制</li>
+<li>每个信号都有以SIG开头的名字</li>
+<li>信号被定义为正整数<br />
+在&lt;signal.h&gt;中定义</li>
+</ul>
+<h4>产生信号的方法</h4>
+<ul>
+<li>按终端键<br />
+^C-&gt;SIGINT</li>
+<li>硬件异常<br />
+如内存错误：SIGSEGV</li>
+<li>kill函数</li>
+<li>kill命令</li>
+<li>软件条件<br />
+某种软件条件已经发生，并应将其通知有关进程-&gt;SIGALARM</li>
+</ul>
+<h4>系统预定义的信号</h4>
+<ul>
+<li>见ppt</li>
+<li>支持的所有信号可以在Linux中通过<code>man 7 signal</code>进行查询</li>
+</ul>
+<h3>2.信号处理</h3>
+<ul>
+<li>忽略信号<br />
+SIGKILL、SIGSTOP等严重错误不能被忽略</li>
+<li>执行系统默认动作</li>
+<li>捕捉信号</li>
+</ul>
+<h3>3.signal函数</h3>
+<pre><code>#include &lt;signal.h&gt;
+
+typedef void (*sighandler_t)(int);
+sighandler_t signal(int signum,sighandler_t handler);
+</code></pre>
+
+<ul>
+<li>如果函数调用成功，返回上一个信号处理函数<br />
+例如在执行程序某一段时希望程序不响应^C，可以在这段程序执行结束后再将其注册回去</li>
+<li>如果出错，返回SIG_ERR</li>
+<li>
+handler参数
+<ul>
+<li>用户定义的函数</li>
+<li>SIG_DEF（默认信号处理）</li>
+<li>SIG_IGN（忽略）</li>
+</ul>
+</li>
+</ul>
+<h4>代码范例</h4>
+<pre><code>static void sig_usr(int);
+
+int main()
+{
+    if(signal(SIGUSR1,sig_usr)==SIG_ERR)
+        err_sys(&quot;can't catch SIGUSR1&quot;);
+    if(signal(SIGUSR2,sig_usr)==SIG_ERR)
+        err_sys(&quot;can't catch SIGUSR2&quot;);
+
+    //continue
+}
+</code></pre>
+
+<h3>4.信号的可靠性简述</h3>
+<ul>
+<li>信号可能在到达激活的响应函数前被丢弃</li>
+<li>现代Linux将信号分为可靠信号和不可靠信号<br />
+&lt;SIGRTMIN（通常为32）的被认为是不可靠信号，其它的是可靠信号</li>
+<li>不可靠信号可能会丢失<br />
+如连续产生信号的情形，或多个信号同时到达</li>
+<li>或是线程十分忙时，可能不会立即响应</li>
+<li>信号的复位<br />
+处理完后信号立即被重置，信号的响应函数在被调用过一次之后就改回原有的默认函数<br />
+如果还需要继续处理，把么就要在处理函数中重新注册</li>
+</ul>
+<h3>5.中断系统调用</h3>
+<p>低速系统调用在接受到信号时会被中断其等待</p>
+<ul>
+<li>读/写某些类型的文件</li>
+<li>打开某些类型设备</li>
+<li>pause</li>
+<li>wait</li>
+<li>ioctl</li>
+<li>进程间通讯</li>
+</ul>
+<p>此时返回出错值，errno==EINTR</p>
+<h4>解决方法</h4>
+<pre><code>again:
+    if((n==read(fd,buf,BUFFSIZE))&lt;0)
+    {
+        if(errno==EINTR)
+            goto again;                 //just an interrupted system call
+
+        //Handle other errors
+    }
+</code></pre>
+
+<h3>6.可重入函数</h3>
+<p>即可以被中断的函数</p>
+<h4>不可重入函数</h4>
+<p>尽量不要在信号处理函数中使用，可能有一定概率出错<br />
+主函数无法控制信号产生的时机，因而调用这些不可重入函数的中间状态不可预料<br />
+<em>从而对内核产生不可预料的影响</em></p>
+<ul>
+<li>系统资源</li>
+<li>全局变量<br />
+诸如++、--等非原子操作</li>
+<li>使用静态数据结构</li>
+<li>调用malloc或free</li>
+<li>标准I/O函数</li>
+</ul>
+<p>所有函数的清单见ppt</p>
+<h3>7.发送信号</h3>
+<ul>
+<li>发送信号有权限要求</li>
+<li>root可以给所有进程发信号</li>
+<li>低权限用户不能向高权限用户进程发送信号</li>
+</ul>
+<h4>kill(2)</h4>
+<p>向一个指定进程发送信号</p>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;signal.h&gt;
+
+int kill(pid_t pid,int sig);
+</code></pre>
+
+<ul>
+<li>可以使用<code>kill</code>发送任何信号</li>
+<li>pid一样可以多样取值，和waitpid相同</li>
+</ul>
+<h4>raise(3)</h4>
+<p>向当前的进程（自己）发送信号</p>
+<pre><code>#include &lt;signal.h&gt;
+
+int raise(int sig);
+</code></pre>
+
+<h4>alarm</h4>
+<p>过一段时间向自己发送SIGALARM信号，类似闹钟</p>
+<pre><code>#include &lt;unistd.h&gt;
+
+unsigned int alarm(unsigned int seconds);
+</code></pre>
+
+<ul>
+<li>没有设定处理函数时，默认行为为退出</li>
+<li>连续发送SIGALARM信号时，最新的alarm将替换掉原有的，返回出上次闹钟的剩余倒计时<br />
+第一次调用，返回值为0</li>
+<li>alarm还可以用于对可能阻塞的操作做时间限制<br />
+远离如前所述</li>
+</ul>
+<h4>pause</h4>
+<p>等待一个信号</p>
+<pre><code>#include &lt;unistd.h&gt;
+
+void pause();
+</code></pre>
+
+<h4>利用alarm与pause实现sleep</h4>
+<pre><code>void sig_alarm(int signo)
+{
+    printf(&quot;alarm received.\n&quot;);
+}
+
+unsigned int sleep1(unsigned int nsecs)
+{
+    if(signal(SIGALARM,sig_alarm)==SIG_ERR)
+        return nsecs;
+
+    alarm(nsecs);
+    pause();
+
+    return alarm(0);            //将闹钟清零而取消掉
+}
+</code></pre>
+
+<h2>四、可靠信号机制</h2>
+<h3>1.信号集操作</h3>
+<p>信号集本质就是一个集合</p>
+<pre><code>#include &lt;signal.h&gt;
+
+int sigemptyset(sigset_t *set);
+int sigfillset(sigset_t *set);
+int sigaddset(sigset_t *set,int signum);
+int sigdelset(sigset_t *set,int signum);            //以上四个函数返回0为成功，-1为出错
+int sigismember(xonst sigset_t *set,int signum);    //返回值依照C标准
+</code></pre>
+
+<p>集合的返回均以参数的方式进行</p>
+<h3>2，信号掩码</h3>
+<p>用于检测或更改（<em>或两者</em>）进程的信号掩码</p>
+<pre><code>#include &lt;signal.h&gt;
+
+int sigprocmask(int how,const sigset_t *set,sigset_t *oldset);
+</code></pre>
+
+<p>oldset将返回出原有的信号集</p>
+<h4>参数how</h4>
+<ul>
+<li>SIG_BLOCK<br />
+将信号并入掩码</li>
+<li>SIG_UNBLOCK<br />
+在掩码中除去相应的信号</li>
+<li>SIG_SETMASK<br />
+直接设定</li>
+</ul>
+<h4>特殊情形</h4>
+<ul>
+<li>在sigprocmask调用后，任何未阻塞并且pending的信号，在函数返回前，至少有一个信号会送达进程<br />
+所有信号集内的信号都会被屏蔽，但将会被置为pending，更多相同类型的信号将被丢弃<br />
+被屏蔽的信号重新打开时，信号将被处理，并且一定在sigprocmask返回之前被处理</li>
+<li><strong>但SIGKILL、SIGSTOP例外</strong><br />
+这两个信号无法被阻塞</li>
+</ul>
+<h4>sigpending</h4>
+<p>返回当前未决的信号集</p>
+<pre><code>#include &lt;signal.h&gt;
+
+int sigpending(sigset_t *set);      //set被用来输出信号集
+</code></pre>
+
+<h4>sigaction</h4>
+<p>用于检查或修改与指定信号关联的处理动作，与<code>signal</code>系统调用差不多，被用来将其替代</p>
+<pre><code>#include &lt;signal.h&gt;
+
+int sigaction(int signum,const struct sigaction *act,struct sigaction *oldact);
+</code></pre>
+
+<ul>
+<li>
+sigaction中除了函数指针以外，还会包含其它成员
+<ul>
+<li>sigaction中的屏蔽字仅在执行信号处理函数期间生效<br />
+当前正在响应的信号被默认直接屏蔽，不需设置</li>
+<li>sa_flags可以有多种设定参数<br />
+见ppt</li>
+</ul>
+</li>
+</ul>
+<h4>sigsuspend</h4>
+<p>用sigmask临时替换信号掩码，在捕捉一个信号或发生终止进程的信号前，进程挂起</p>
+<pre><code>#include &lt;signal.h&gt;
+
+int sigsuspend(const sigset *sigmask);  
+</code></pre>
+
+<ul>
+<li>等待信号时，信号可以是之前pending的，也可以是在等待过程中出现的</li>
+<li>等待结束后，信号掩码仍然恢复到原先的设定</li>
+</ul>
+<h2>五、共享内存</h2>
+<p>共享内存是内核为进程创建的特殊内存段，它可以连接到自己的地址空间，也可以连接到其它进程的地址空间</p>
+<ul>
+<li>最快的进程间通信方式</li>
+<li>不提供任何同步功能</li>
+<li>线程共享内存的存储位置一定在<strong>内核的内核态</strong></li>
+</ul>
+<h3>1.系统调用</h3>
+<h4>分配</h4>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/ipc.h&gt;
+#include &lt;sys/shm.h&gt;
+
+int shmget(ket_t key,int size,int flag);
+</code></pre>
+
+<ul>
+<li>要求系统分配一块共享内存，若成功，返回值即为内存区域的标识符<br />
+由于通常按页分配内存，因此得到的值一般比size稍大</li>
+<li>key_t key是一个用户定义的标识符</li>
+<li>flag决定由系统找一块共享内存或是分配一块新的<br />
+可以是NULL、<code>IPC_CREAT</code>、<code>IPC_PRIVATE</code>、<code>IPC_EXECL</code>、rwx权限<br />
+其中定义为NULL时则为强制要求一块共享内存</li>
+</ul>
+<h4>映射</h4>
+<p>进程工作在用户态，不会有权限去直接访问（尤其是写）内核的内容；向共享内存区域的读写权限被内核开放给了进程，映射就</p>
+<pre><code>void *shmat(int shmid,void *addr,int flag)
+</code></pre>
+
+<ul>
+<li>addr：可选参数，指定共享内存映射到的地址</li>
+<li>flag：<code>SHM_RND</code>、<code>SHM_RDONLY</code></li>
+<li>不同进程对同一块共享内存要求映射，得到的地址可能不同</li>
+</ul>
+<h4>解除映射</h4>
+<h4>释放与查询</h4>
+<pre><code>int shmctl(int shmid,int cmd,struct shmid_ds *buf)
+</code></pre>
+
+<ul>
+<li>只有cmd置为<code>IPC_RMID</code>时，才进行释放操作</li>
+</ul>
+<h5>可查询的状态（不要求）</h5>
+<p>见ppt</p>
+<h3>2.文件的内存地址映射</h3>
+<pre><code>void *mmap(void *addr,size_t length,int prot,int flags,int fd,off_t offset);
+int munmap(void *addr,size_t length);
+</code></pre>
+
+<ul>
+<li>prot参数<br />
+PROT_READ<br />
+PROT_WRITE<br />
+PROT_EXEC<br />
+PROT_NONE</li>
+<li>flags参数<br />
+MAP_SHARED：文件可以被多个进程映射，但写入的内容不反映到文件上<br />
+MAP_ANONYMOUS：在全局空间创建一个可读写的文件<br />
+MAP_PRIVATE</li>
+</ul>
+<h2>六、POSIX线程</h2>
+<h3>1.Linux的POSIX线程实现</h3>
+<ul>
+<li>NGPT与NPTL<br />
+两者已经合并，偏向后者</li>
+<li>要对它们支持都必须对Linux内核进行更改</li>
+</ul>
+<h3>2.编程预备条件</h3>
+<h4>pthread库</h4>
+<ul>
+<li>/usr/lib/libpthread.so</li>
+<li>/usr/lib/libpthread.a</li>
+</ul>
+<h4>pthread.h头文件</h4>
+<p>/usr/include/pthread.h</p>
+<h4>编译选项</h4>
+<pre><code>gcc thread.c -o thread -lpthread
+</code></pre>
+
+<h3>3.命名习惯</h3>
+<p>所有名称以pthread_开头</p>
+<ul>
+<li>pthread_</li>
+<li>pthread_attr_</li>
+<li>pthread_mutex_</li>
+<li>pthread_mutexattr_</li>
+<li>pthread_cond_</li>
+<li>pthread_condattr_</li>
+<li>pthread_key_</li>
+</ul>
+<h3>4.基本线程函数</h3>
+<h4>创建线程</h4>
+<pre><code>#include &lt;pthread.h&gt;
+
+int pthread_create(pthread_t *thread,pthread_attr_t *attr,
+    void* (*start_roiutine)(void *),void *arg);
+</code></pre>
+
+<h4>结束当前线程</h4>
+<pre><code>void pthread_exit(void *retval);
+</code></pre>
+
+<h3>5.Joinable与Detached线程</h3>
+<ul>
+<li>主线程默认等待所有子线程结束后才结束</li>
+<li>如果要关闭这一特性，需要将子线程设定为Detached</li>
+<li>Linux下线程没有严格的主次之分</li>
+</ul>
+<h4>相关函数</h4>
+<pre><code>int pthread_join(pthread_t th,void **thread_return);
+int pthread_detach(pthread_t th);
+</code></pre>
+
+<h3>6.线程同步</h3>
+<h4>用信号量进行同步</h4>
+<pre><code>#include &lt;semaphore.h&gt;
+
+int sem_init(sem_t *sem,int pshared,unsigned int value);
+int sem_wait(sem_t *sem);
+int sem_post(sem_t *sem);
+int sem_destroy(sem_t *sem);
+
+int sem_trywait(sem_t *sem);
+int sem_getvalue(sem_t *sem,int *sval);
+</code></pre>
+
+<ul>
+<li>sem_trywait在信号量为0时，不会阻塞等待而立即失败返回，返回值为<code>EAGAIN</code></li>
+</ul>
+<h4>用互斥量进行同步</h4>
+<ul>
+<li>可以使用<code>PTHREAD_MUTEX_INITIALIZER</code>静态初始化</li>
+<li>
+<p>也可以使用相关函数动态初始化</p>
+<pre><code>#include &lt;pthread.h&gt;
+
+int pthread_mutex_init(pthread_mutex_t *mutex,
+                const pthread_mutexattr_t *mutexattr);
+int pthread_mutex_lock(pthread_mutex_t *mutex);
+int pthread_mutex_unlock(pthread_mutex_t *mutex);
+int pthread_mutex_destroy(pthread_mutex_t *mutex);
+int pthread_mutex_trylock(pthread_mutex_t *mutex);
+</code></pre>
+
+</li>
+</ul>
+<h4>用条件变量进行同步</h4>
+<ul>
+<li>检查条件是否被满足<br />
+队列的机制<br />
+类似于Windows的事件机制</li>
+<li>条件变量常与互斥量一同使用</li>
+<li>条件变量提供了unlock与wait的复合原子操作<br />
+多线程的互斥全部可以应用此模式</li>
+</ul>
+<h5>初始化条件变量</h5>
+<ul>
+<li>
+<p>静态初始化</p>
+<pre><code>pthread_cond_t convar=PTHREAD_COND_INITIALIZER; //已由系统初始化好
+</code></pre>
+
+<p>一个宏并不只对应一个条件变量，可以被多次调用</p>
+</li>
+<li>
+<p>动态初始化</p>
+<pre><code>int pthread_cond_init(pthread_cond_t *cond,pthread_condattr_t *cond_attr);
+</code></pre>
+
+<p><em>第二个参数在很多库里没有被实现，直接提供<code>NULL</code>即可</em></p>
+</li>
+</ul>
+<p>静态初始化的条件变量不需要释放，但动态初始化的要销毁</p>
+<h5>销毁条件变量</h5>
+<pre><code>int pthread_cond_destroy(pthread_cond_t *cond);
+</code></pre>
+
+<h5>可参与的工作方式</h5>
+<p>广播、等待、通知</p>
+<pre><code>int pthread_cond_wait(pthread_cond_t *cond,pthread_mutex_t *mutex);
+int pthread_cond_timedwait(pthread_cond_t *cond,pthread_mutex_t &amp;mutex,
+    time_t *timeout);
+int pthread_cond_signal(pthread_cond_t cond);
+int pthread_cond_croadcast(pthread_cond_t cond);
+</code></pre>
+
+<ul>
+<li>通知只通知处于等待状态的一个条件变量<br />
+随机的一个，具体是哪个无法被控制</li>
+<li>广播将唤醒所有处于等待状态的条件变量</li>
+<li>wait操作在被唤醒时，互斥量会被自动锁上<br />
+因此最终一定要手动再释放一次互斥量</li>
+</ul>
+<h5>使用模式</h5>
+<blockquote>
+<h6>主线程</h6>
+<p>负责初始化和释放</p>
+<ol>
+<li>声明并初始化需要同步的全局数据和变量</li>
+<li>声明并初始化条件变量对象</li>
+<li>声明并初始化相关的互斥量</li>
+<li>创建工作线程</li>
+<li>等待并继续</li>
+</ol>
+<h6>工作线程1</h6>
+<ol>
+<li>工作，直到满足一个特定的条件</li>
+<li>锁上对应的互斥量并检查全局数据的值</li>
+<li>等待条件变量（此时互斥量自动解锁）</li>
+<li>手动地锁上互斥量</li>
+<li>继续工作</li>
+</ol>
+<h6>工作线程2</h6>
+<ol>
+<li>工作</li>
+<li>锁住相关的信号量</li>
+<li>改变全局数据的值</li>
+<li>检查被等待的全局数据的值，如果满足条件，唤醒一个工作线程1</li>
+<li>解锁信号量</li>
+<li>继续工作</li>
+</ol>
+</blockquote>
+<h2>七、线程的更多讨论</h2>
+<h3>1.线程属性对象</h3>
+<p>pthread_attr_t</p>
+<h4>初始化</h4>
+<pre><code>#include &lt;pthread.h&gt;
+
+int pthread_attr_init(pthread_attr_t *attr);
+</code></pre>
+
+<h4>get/set族函数</h4>
+<pre><code>int pthread_attr_setdetachstate(pthread_attr_t *attr,int detachstate);
+int pthread_attr_getdetachstategetdetachstate(const pthread_attr_t *attr,
+    int *detachstate);
+int pthread_attr_setschedpolicy(pthread_attr_t *attr,
+    int policy);
+int pthread_attr_getschedpolicy(const pthread_attr_t *attr,
+    int *policy);
+int pthread_attr_setschedparam(pthread_attr_t *attr,
+    int param);
+int pthread_attr_getschedparam(const pthread_attr_t *attr,
+    int *param);
+</code></pre>
+
+<ul>
+<li>detachstate属性<br />
+<code>PTHREAD_CREATE_JOIN</code>/<code>PTHREAD_CREATE_DETACHED</code></li>
+<li>schedpolicy属性<br />
+<code>SCHED_OTHER</code>/<code>SCHED_RR</code>/<code>SCHED_FIFO</code><br />
+后两个都是实时调度策略</li>
+<li>schedparam属性<br />
+调度参数，主要是优先级的设定</li>
+</ul>
+<h3>2.终止线程</h3>
+<pre><code>int pthread_cancel(pthread_t thread);
+int pthread_setcancelstate(int state,int *oldstate);
+int pthread_setcanceltype(int type,int *oldtype);
+</code></pre>
+
+<ul>
+<li>setcancelstate用于设置是否理会其它线程的cancel<br />
+可传入<code>PTHREAD_CANCEL_ENABLE</code>或<code>PTHREAD_CANCEL_DISABLE</code></li>
+<li>setcanceltype用于设置中止的时间点<br />
+可传入<code>PTHREAD_CANCEL_DEFFERD</code>或<code>PTHREAD_CANCEL_ASYNCRONOUSD</code><br />
+决定直到需要任何等待时再退出或是立即退出</li>
+</ul>
+<h3>3.多线程程序</h3>
+<h4>容易的错误</h4>
+<ul>
+<li>共享变量取法保护（未互斥使用）</li>
+<li>常见线程时传递指针，指针指向的内容可能是共享的</li>
+</ul>
+<h4>TLS</h4>
+<pre><code>int pthread_key_create(pthread_key_t *key,void (*destructor)(void*));
+int pthread_key_delete(pthread_key_t key);
+void* pthread_getspecific(pthread_key_t key);
+int pthread_setspecific(pthread_key_t key,const void *value);
+</code></pre>
+
+<ul>
+<li>与Windows不同在于，存入和取出的内容明确为void *类型</li>
+<li>可以明确地指定传入数据的析构函数，用于对存入的指针指向的内容进行释放<br />
+这里的析构函数在对应线程执行结束后自动执行<br />
+<em>释放key时并不会释放key指向的内容，因此这里一定要手动进行释放</em></li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

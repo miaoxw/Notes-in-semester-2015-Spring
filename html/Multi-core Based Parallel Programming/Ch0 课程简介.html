@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ch0 课程简介</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>并行计算概述</h1>
+<h2>一、背景知识：微处理器发展史</h2>
+<h3>1.计算机与微处理器</h3>
+<ul>
+<li>电子管计算机</li>
+<li>晶体管计算机</li>
+<li>集成电路计算机</li>
+<li>大规模集成电路计算机<br />
+1971年以后</li>
+</ul>
+<h3>2.4位、8位与16位微处理器</h3>
+<h4>第一代处理器</h4>
+<ul>
+<li>4位</li>
+<li>1971年，Intel的4004<br />
+第一款微处理器</li>
+</ul>
+<h4>第二代处理器</h4>
+<ul>
+<li>8位</li>
+<li>Intel 8080、8085</li>
+<li>Zilog Z80</li>
+<li>Motorola 6800</li>
+</ul>
+<h4>第三代处理器</h4>
+<ul>
+<li>16位</li>
+<li>Motorola 68000</li>
+<li>……</li>
+</ul>
+<h4>第四代处理器</h4>
+<ul>
+<li>32位</li>
+<li>……</li>
+</ul>
+<h3>3.双核处理器发布的原因</h3>
+<h4>硬件的瓶颈</h4>
+<ul>
+<li>单核处理器的性能相对更好些</li>
+<li>主频的提高相对困难</li>
+</ul>
+<h4>瓶颈产生的原因</h4>
+<h5>芯片功耗与主频立方成正比</h5>
+<p>完全有能力继续提升主频，但主频提升后功耗将无法接受</p>
+<ul>
+<li>电费无法接受</li>
+<li>高功耗的潜在危险</li>
+<li>散热等一系列的问题</li>
+</ul>
+<h5>门电路的集成因素</h5>
+<ul>
+<li>频率越高，门电路数量越大<br />
+数量过大后电路延迟问题突出</li>
+</ul>
+<h3>4.摩尔定律</h3>
+<pre><code>当价格不变时，集成电路上可容纳的晶体管数目约每隔18个月便会增加一倍。
+</code></pre>
+
+<ul>
+<li>实际上就是主频每18个月翻番</li>
+<li>为了维持摩尔定律，多核是唯一的解决方案</li>
+</ul>
+<h2>二、开课的原因</h2>
+<p>单核程序编写技术无法充分利用现有的计算资源</p>
+<ul>
+<li>多核技术的发展</li>
+<li>并行程序设计变得寻常</li>
+<li>多线程编程</li>
+</ul>
+<h2>三、课程内容</h2>
+<ul>
+<li>并行计算基础<br />
+系统、模型、算法与编程方法</li>
+<li>多核计算概述<br />
+多核架构与多核处理器、多核编程</li>
+<li>
+基于多核的并行编程
+<ul>
+<li>多线程与并行编程</li>
+<li>多线程编程：Windows多线程编程、Linux进程与pthead</li>
+<li>OpenMP、MPI</li>
+<li>TBB、Erlang等<br />
+多进程编程与进程间通信</li>
+</ul>
+</li>
+<li>并行编程中常见问题及解决方法</li>
+<li>Intel多核处理器的软件工具</li>
+</ul>
+<h2>四、基本概念</h2>
+<h3>1.高性能计算</h3>
+<h3>2.并行计算</h3>
+<p>并行计算的研究涵盖并行计算机体系结构、并行编程和并行算法三个方面，挑战在于软件和应用</p>
+<h4>并行计算的挑战</h4>
+<ul>
+<li>协同计算</li>
+<li>控制计算</li>
+<li>监控计算</li>
+</ul>
+<h4>并行算法</h4>
+<ul>
+<li>包含多个同时活动的线程或进程，同时解决一个共同的问题<br />
+并行计算中的进程与线程已经针对同一个任务来说</li>
+<li>通过通信和同步来完成相应的任务</li>
+</ul>
+<h3>3.并行与并发</h3>
+<ul>
+<li>并发（Concurrency）：多个同时运行的程序<br />
+以时间片划分的机制同时运行多个程序，但在某一个时间点上，只有一个程序在运行</li>
+<li>并行（Parallelism）：同一时刻，多个任务同时执行</li>
+</ul>
+<p>并发是包含并行的，但并行并不一定是并发</p>
+<h3>4.可扩展性</h3>
+<p>根据需要<strong>增加或减少</strong>资源</p>
+<h4>可扩展性的内涵</h4>
+<ul>
+<li>功能或性能</li>
+<li>成本的裁剪</li>
+<li>兼容性</li>
+</ul>
+<h4>可扩展性的维度</h4>
+<ul>
+<li>资源的可扩展性<br />
+机器可以根据需要增减资源</li>
+<li>应用的可扩展性<br />
+可以增减功能</li>
+<li>技术的可扩展性<br />
+现有架构不变的情况下，能否适应新技术</li>
+</ul>
+<h3>4.性能分析</h3>
+<h4>加速比</h4>
+<pre><code>加速比=最优串行算法执行时间/并行程序执行时间
+</code></pre>
+
+<p>描述对程序并行化之后获得的性能收益</p>
+<ul>
+<li>若加速比小于1，这样的并行算法还不如串行算法</li>
+</ul>
+<h4>Amdahl定律：固定问题规模</h4>
+<pre><code>加速比=1/(S+(1-S)/N)
+S：程序中串行部分的比例
+n：机器规模（或处理器核的数目）
+</code></pre>
+
+<ul>
+<li>即使程序的并行再充分，总有一些工作无法并行（如任务向核心的分配）</li>
+<li>适用于固定问题规模（问题负载），减少响应时间</li>
+</ul>
+<h4>Gustafson定律：固定时间</h4>
+<pre><code>扩展加速比=(1-S)*n+S
+</code></pre>
+
+<ul>
+<li>固定计算时间，扩大问题规模，提高计算精度</li>
+<li>此定律的计算结果往往有差异<br />
+主要是由于S的定义不同<br />
+Gustafson定律中的S是<strong>串行时间占并行化后运行时间的比</strong></li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

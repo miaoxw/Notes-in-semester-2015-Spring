@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ch1-2 并行编程基础</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>并行编程基础</h1>
+<h2>一、综述</h2>
+<h3>1.什么是并行编程</h3>
+<pre><code>并行编程是对给定算法构造并行程序的活动。
+</code></pre>
+
+<p><em>算法与体系结构之间的接口</em></p>
+<h3>2.现状：并行软件与串行软件</h3>
+<h3>3.编程模型</h3>
+<p>程序员在开发一个并行程序时所见到和使用的模型</p>
+<h4>自然模型</h4>
+<p>一个特定并行计算机平台所提供的、用户可见的最底层的编程模型</p>
+<h4>高层编程模型</h4>
+<p>在自然模型上加以实现</p>
+<h3>4.并行编程进展</h3>
+<ul>
+<li>尽管大多数算法基于PRAM模型，但大多数经过修正后可以实用</li>
+<li>并行算法已逐渐被用户所接受</li>
+<li>自然模型集中趋向于单地址空间的共享变脸模型和多地址空间的消息传递模型<br />
+SIMD模型已经淡出</li>
+<li>高层并行编程模型集中趋向于数据并行、消息传递和共享变量<br />
+还有隐式并行的编程模型</li>
+</ul>
+<h2>二、并行编程模型</h2>
+<h3>1.并行编程环境</h3>
+<ul>
+<li>有给定的算法</li>
+<li>编写程序</li>
+<li>通过编译程序得到自然并行代码</li>
+<li>要并有并行平台的支持</li>
+</ul>
+<p>因此，可以以下方式提供并行接口：</p>
+<ul>
+<li>提供并行库</li>
+<li>提供新的并行语言</li>
+<li>提供自动化的并行编译器</li>
+</ul>
+<h3>2.显式并行与隐式并行</h3>
+<h4>显式并行</h4>
+<ul>
+<li>在源程序中有程序员使用专用语言构造、编译器命令或库函数对并行性加以显式说明</li>
+<li>共享变量模型、消息传递模型、数据并行模型</li>
+</ul>
+<h4>隐式并行</h4>
+<ul>
+<li>程序员不显式地说明并行性，而是让编译器或运行支持系统自动进行开发</li>
+<li>12</li>
+</ul>
+<h3>3.并行化方法</h3>
+<h4>环境支持</h4>
+<p>主要是对Fortran或C进行扩展</p>
+<h5>例程库</h5>
+<p>在串行语言中加入一组新的库函数，以支持并行化和交互操作<br />
+如MPI库、POSIX PThread多线程库</p>
+<h5>新构造</h5>
+<p>扩展程序设计语言使其具有某些新构造，以支持并行化和交互</p>
+<h5>编译器命令/预处理</h5>
+<p>程序设计语言不变，但加入称为编译器命令的格式化注解</p>
+<p><em>Java是在虚拟机之上的高层次形式，目前存在一些并行机制，但并未统一，比如Hadoop</em></p>
+<h4>举例</h4>
+<h5>串行代码</h5>
+<pre><code>for(i=0;i&lt;N;i++)
+    A[i]=b[i]*b[i+1];
+for(i=0;i&lt;N;i++)
+    C[i]=A[i]+A[i+1];
+</code></pre>
+
+<h5>使用库例程的等效并行代码</h5>
+<pre><code>id=my_process_id();             //当前程序所在的核
+p=number_of_processes();
+for(i=id;i&lt;N;i+=p)
+    A[i]=b[i]*b[i+1];           //对核心1，执行i=1,5,9,13,...的计算操作
+barrier();                      //路障同步，避免因任务负载不均匀产生可能的错误
+for(i=id;i&lt;N;i+=p)
+    c[i]=A[i]+A[i+1];
+</code></pre>
+
+<h5>Fortran 90中使用数组操作的等效代码</h5>
+<pre><code>my_process_id(),number_of_processes(),and barrier() //以上是一段声明
+A(0:N-1)=b(0:N-1)*b(1:N)                            //在语句上做向量操作
+c=A(0:N-1)+A(1:N)
+</code></pre>
+
+<h5>SGI Power C中使用pragma的等效代码</h5>
+<pre><code>#pragma parallel                    //预编译指令仍然由编译器处理
+#pragma shared(A,b,c)               //通报各变量的共享情况
+#pragma local(i)
+{
+    #pragma pfor iterate(i=0;N;1)   //要求编译器对此for循环实现并行分配
+        for(i=0;i&lt;N;i++)
+            A[i]=b[i]*b[i+1];
+    #pragma synchronize
+    #pragma pfor iterate(i=0;N;1)
+        for(i=0;i&lt;N;i++)
+            c[i]=A[i]+A[i+1];
+}
+</code></pre>
+
+<h4>总结</h4>
+<h5>库例程</h5>
+<ul>
+<li>实例<br />
+MPI、PVM、Cray Craft</li>
+<li>优点<br />
+易于实现，不需要新的编译器</li>
+<li>缺点<br />
+无编译器检查、分析和优化</li>
+</ul>
+<h5>新构造</h5>
+<ul>
+<li>实例<br />
+Fortran 90、Cray Craft</li>
+<li>优点<br />
+允许编译器检查、分析和优化</li>
+<li>缺点<br />
+实现困难，需要新编译器，用户也需要学习新语言</li>
+</ul>
+<h5>命令</h5>
+<ul>
+<li>实例<br />
+HPF、Cray Craft</li>
+<li>优缺点<br />
+介于库例程和新构造方法之间，在串行平台上不起作用</li>
+</ul>
+<h3>4.显式并行编程模型</h3>
+<h4>数据并行</h4>
+<ul>
+<li>单控制流</li>
+<li>松散同步</li>
+<li>单地址空间</li>
+<li>隐式交互</li>
+<li>隐式或半显式的数据分配</li>
+<li>以HPF和IPP为典型代表</li>
+<li>可在SMP、DSM、MPP上移植</li>
+<li>以进程级别的细粒度并行</li>
+<li>学习入门偏易</li>
+</ul>
+<p><em>Fortran 90的并行方式基本可以看作是数据并行的代码</em></p>
+<h4>消息传递</h4>
+<ul>
+<li>多控制流</li>
+<li>异步同步</li>
+<li>多地址空间</li>
+<li>显式交互</li>
+<li>显式数据分配</li>
+<li>以MPI和PVM为典型代表</li>
+<li>可在所有主流并行计算机上移植</li>
+<li>以进程级别的大粒度并行</li>
+<li>学习入门较难</li>
+</ul>
+<h4>共享变量</h4>
+<ul>
+<li>多控制流</li>
+<li>异步同步</li>
+<li>单地址空间</li>
+<li>显式交互</li>
+<li>隐式或半显式的数据分配</li>
+<li>以OpenMP为典型代表</li>
+<li>可在SMP、DDSM上移植</li>
+<li>以<strong>线程</strong>级别的细粒度并行</li>
+<li>学习入门容易</li>
+</ul>
+<h3>4.其它并行编程模型</h3>
+<p>除命令式语言以外的方法</p>
+<ul>
+<li>函数式编程</li>
+<li>逻辑编程</li>
+<li>通过机器学习进行计算</li>
+<li>面向对象编程</li>
+</ul>
+<h2>三、并行编程的策略和方法</h2>
+<h3>1.分解</h3>
+<p>将应用程序划分成多个独立的任务，并确定这些任务之间的相互依赖关系</p>
+<p><em>此问题在考虑需求本身时就应当涉及</em></p>
+<h4>分解方式</h4>
+<h5>任务分解</h5>
+<p>从功能角度进行分解</p>
+<h5>数据分解</h5>
+<p>各部分拥有相同的功能，但这些功能使用的数据不同<br />
+<em>可以有效地提高数据吞吐量</em></p>
+<h5>数据流分解</h5>
+<p>分解数据的处理阶段</p>
+<h4>任务分解与数据流分解</h4>
+<h5>数据分解与两者的关系</h5>
+<p>显然</p>
+<h5>任务分解与两者的关系</h5>
+<p>以UML中的各种图为类比</p>
+<ul>
+<li>任务分解对应活动图<br />
+体现各个流程的变化</li>
+<li>数据流分解对应数据流图<br />
+数据流图和活动图可以完全不相关</li>
+</ul>
+<h4>总结</h4>
+<h5>任务分解</h5>
+<ul>
+<li>不同的程序行为采用不同的进程或线程实现</li>
+<li>常用于GUI应用程序</li>
+</ul>
+<h5>数据分解</h5>
+<ul>
+<li>多个进程活线程对不同的数据块执行相同的操作</li>
+<li>常用于音频、图像处理和科学计算应用程序</li>
+</ul>
+<h5>数据流分解</h5>
+<ul>
+<li>对数据处理阶段的不同操作进行分解</li>
+<li>需要注意尽量消除启动和排空延迟</li>
+</ul>
+<h3>2.并行编程面对的挑战和问题</h3>
+<ul>
+<li>同步<br />
+两个或多个进程（线程）协调其行为的过程</li>
+<li>通信<br />
+线程（或进程）之间交互数据相关的带宽和延迟问题</li>
+<li>负载平衡<br />
+使线程活进程的工作量尽量平均分配</li>
+<li>可扩展性<br />
+在性能更强劲的系统上性能能否线性增长</li>
+</ul>
+<h3>3.并行编程的模式</h3>
+<h4>设计模式</h4>
+<ul>
+<li>描述在特定上下文中解决重复问题的有效方法</li>
+<li>遵循一定的格式，包括模式名、背景、面对的问题因素（即目标和限制）、解决方案</li>
+<li>记录专家经验，供遇到类似问题的其他人员参考</li>
+</ul>
+<h4>任务并行模式</h4>
+<h5>问题</h5>
+<p>当问题被最好地分解为一个能够并发执行的任务集合时，如何高效地开发这种并行性</p>
+<h5>背景</h5>
+<ul>
+<li>设计直接基于任务</li>
+<li>并行算法以一个并发任务集合为基础</li>
+<li>识别任务及其相关性</li>
+</ul>
+<h5>面临问题</h5>
+<ul>
+<li>负载平衡</li>
+<li>管理任务相关性</li>
+</ul>
+<h5>示例</h5>
+<ul>
+<li>医学成像PET<br />
+对一系列的巨量图像进行处理<br />
+可以做任务并行（按图像校正的不同处理过程分解），也可以做数据并行（按人体部位分块）</li>
+<li>分子动力学<br />
+将一个大分子分解为多个部分，成为数据分解<br />
+将不同旋转方向的作用情况分别计算，成为任务分解</li>
+</ul>
+<h5>解决方案</h5>
+<ul>
+<li>
+任务<br />
+两个标准
+<ul>
+<li>任务的数目至少与处理单元的数目一样多</li>
+<li>与每个任务相关的计算量必须足够多</li>
+</ul>
+</li>
+<li>相关性<br />
+顺序约束，和共享有关的相关性</li>
+<li>调度<br />
+静态调度/动态调度</li>
+<li>程序结构<br />
+循环结构/任务队列</li>
+<li>常用术语<br />
+易并行问题、复制数据或规约问题</li>
+</ul>
+<h5>分阶段并行</h5>
+<ul>
+<li>将程序分为若干个超步</li>
+<li>每个超步包含计算阶段和交互阶段</li>
+<li>又称为<strong>松散并行模式</strong>和<strong>日程模式</strong></li>
+</ul>
+<h4>分治</h4>
+<ul>
+<li>主过程将工作分给多个子过程，子过程的结果最终再合并给主过程</li>
+<li>通常可以递归实现</li>
+<li>存在小部分不可并行的部分</li>
+<li>如果划分合理，各计算单元的负载就比较均衡</li>
+</ul>
+<h4>几何分解</h4>
+<ul>
+<li>数据分解在设计阶段的称呼</li>
+<li>将所要解决问题中使用的数据结构并行化</li>
+<li>每个线程只负责一些数据块上的操作</li>
+</ul>
+<h4>流水线</h4>
+<ul>
+<li>数据流分解在设计阶段的称呼</li>
+<li>连续的数据流被放置进流水线</li>
+<li>不同的处理步骤同时、重叠地处理不同的数据</li>
+</ul>
+<h3>4.范例与分解方式</h3>
+<ul>
+<li>阶段并行-&gt;任务分解或数据分解</li>
+<li>分治模式-&gt;任务分解或数据分解</li>
+<li>几何分解模式-&gt;数据分解</li>
+<li>流水线模式-&gt;数据流烦呢姐</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
